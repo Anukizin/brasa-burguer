@@ -382,6 +382,11 @@
       sw:src.width,sh:src.height,dw:dst.width,dh:dst.height};
   }
   function renderFlight(){
+    // The V7 unified tray owns both scroll flights; keep only the bridge markup here.
+    if(window.__brasaV7MotionActive){
+      document.documentElement.classList.remove('br-journey-flying');
+      return;
+    }
     if(reduced)return;
     if(!metrics)measure();
     const m=metrics,scroll=window.scrollY;
