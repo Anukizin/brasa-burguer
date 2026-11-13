@@ -214,13 +214,10 @@
   const cans = [...stage.querySelectorAll('.br-v4-can')];
   const reducedMotion = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   let selectedIndex = 0;
-  let confirmed = false;
   const mod = (a,n) => ((a % n) + n) % n;
-  const oldTray = document.getElementById('brTrayBurger');
   const oldTrayPanel = document.getElementById('brTrayVisual');
   let confirmedDrinkKey = null;
   const foodLabels = { batata:'Batata frita', nuggets:'Nuggets', onion:'Onion rings' };
-  const foodSources = { batata:'/assets/brasa_batata_frita.webp', nuggets:'/assets/brasa_nuggets.webp', onion:'/assets/brasa_onion_rings.webp' };
 
   function updateTray() {
     const tray = document.getElementById('brV4Tray');
@@ -233,7 +230,8 @@
     composition.querySelector('.br-tray-placeholder')?.remove();
     composition.setAttribute('aria-hidden','true');
     tray.replaceChildren(composition);
-    tray.classList.toggle('has-drink',Boolean(confirmedDrinkKey));
+    tray.classList.toggle('has-drink', Boolean(confirmedDrinkKey));
+    tray.dataset.confirmedDrink = confirmedDrinkKey || '';
     if (confirmedDrinkKey) {
       const chosen = options.find(option => option.key === confirmedDrinkKey);
       if (chosen) {
@@ -283,8 +281,8 @@
       confirmedDrinkKey = null;
       updateTray();
     }
-    confirmed = false;
-    confirmation.querySelector('span').textContent = 'CONFIRMAR BEBIDA';
+    const confirmed = confirmedDrinkKey === chosen.key;
+    confirmation.querySelector('span').textContent = confirmed ? 'BEBIDA CONFIRMADA ✓' : 'CONFIRMAR BEBIDA';
     status.textContent = `${chosen.label.toUpperCase()} SELECIONADA · DESLIZA OU CLICA PARA TROCAR`;
     // Preserve selection state even if the user navigates back to accompaniments.
   }
@@ -301,7 +299,6 @@
     updateTray();
     const originalButton = root.querySelector(`.br-drink-card[data-drink="${drink.key}"]`);
     originalButton?.click();
-    confirmed = true;
     confirmation.querySelector('span').textContent = 'BEBIDA CONFIRMADA ✓';
     status.textContent = `${drink.label.toUpperCase()} ADICIONADA AO TEU COMBO. PODES TROCAR DE SABOR.`;
   });
@@ -337,9 +334,7 @@
   const stage=document.getElementById('brV4Stage');
   const source=document.getElementById('brTrayVisual');
   const destination=document.getElementById('brV4Tray');
-  const burger=document.getElementById('brTrayBurger');
-  const trayButton=document.getElementById('brTrayButton');
-  if(!combo||!stage||!source||!destination||!trayButton)return;
+  if(!combo||!stage||!source||!destination)return;
   const oldDrinkButton=document.getElementById('brChooseDrink');
   if(oldDrinkButton)oldDrinkButton.remove();
   const ss=document.createElement('style');ss.id='brasa-journey-styles';
@@ -351,78 +346,4 @@
     +'<div class="br-bridge-inner"><span class="br-bridge-overline">BRASA. / DO SMASH AO ÚLTIMO GOLE</span>'
     +'<h2 class="br-bridge-title">O TEU COMBO <span>VAI CONTIGO.</span></h2>'
     +'<span class="br-bridge-caption">CONTINUA A DESLIZAR ↓</span></div></div>');
-  const food={batata:['Batata frita','/assets/brasa_batata_frita.webp'],nuggets:['Nuggets','/assets/brasa_nuggets.webp'],onion:['Onion rings','/assets/brasa_onion_rings.webp']};
-  const keys=Object.keys(food);
-  const label=document.getElementById('brV4TrayCaption');
-  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function chosen(){return keys.filter(k=>source.querySelector('.br-tray-food--'+k)?.classList.contains('is-selected'))}
-  function syncDestination(){
-    const use=chosen();
-    destination.innerHTML='<img class="br-v4-tray-base" src="/assets/brasa_bandeja_vazia.webp" alt="Bandeja BRASA" decoding="async">'
-      +'<div class="br-v4-burger" aria-hidden="true">'+(burger?.innerHTML||'')+'</div>'
-      +use.map(k=>'<img class="br-v4-food br-v4-food--'+k+'" src="'+food[k][1]+'" alt="" decoding="async">').join('')
-      +'<img class="br-v4-tray-lip" src="/assets/brasa_bandeja_vazia.webp" alt="" aria-hidden="true">';
-    if(label)label.textContent=use.length?'SMASH + '+use.map(k=>food[k][0]).join(' · ').toUpperCase():'O TEU SMASH JÁ ESTÁ NA BANDEJA.';
-  }
-  const ghost=document.createElement('div');
-  ghost.className='br-journey-ghost';ghost.setAttribute('aria-hidden','true');document.body.appendChild(ghost);
-  let needsGhost=true,metrics=null,frame=0;
-  function makeGhost(){
-    ghost.replaceChildren();
-    const copy=source.cloneNode(true);copy.id='';copy.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
-    copy.querySelector('.br-tray-placeholder')?.remove();
-    ghost.append(copy);needsGhost=false;
-  }
-  function measure(){
-    const scroll=window.scrollY,src=source.getBoundingClientRect(),dst=destination.getBoundingClientRect();
-    const sy=src.top+scroll,dy=dst.top+scroll,vh=window.innerHeight||800;
-    const start=sy-vh*.56;
-    metrics={start,end:Math.max(start+320,dy-vh*.48),sy,dy,
-      sx:src.left+window.scrollX,dx:dst.left+window.scrollX,
-      sw:src.width,sh:src.height,dw:dst.width,dh:dst.height};
-  }
-  function renderFlight(){
-    // The V7 unified tray owns both scroll flights; keep only the bridge markup here.
-    if(window.__brasaV7MotionActive){
-      document.documentElement.classList.remove('br-journey-flying');
-      return;
-    }
-    if(reduced)return;
-    if(!metrics)measure();
-    const m=metrics,scroll=window.scrollY;
-    const p=Math.max(0,Math.min(1,(scroll-m.start)/(m.end-m.start)));
-    if(p<=0||p>=1||m.sw<=0||m.dw<=0){
-      document.documentElement.classList.remove('br-journey-flying');
-      ghost.style.visibility='hidden';ghost.style.opacity='0';return;
-    }
-    if(!source.classList.contains('is-filled')){
-      trayButton.click();syncDestination();needsGhost=true;
-    }
-    if(needsGhost)makeGhost();
-    document.documentElement.classList.add('br-journey-flying');
-    const ease=p*p*(3-2*p),swing=Math.sin(Math.PI*2*ease)*Math.sin(Math.PI*ease);
-    const x=m.sx+(m.dx-m.sx)*ease+swing*Math.min(83,window.innerWidth*.08);
-    const y=m.sy+(m.dy-m.sy)*ease-scroll-Math.sin(Math.PI*ease)*23;
-    const w=m.sw+(m.dw-m.sw)*ease,h=m.sh+(m.dh-m.sh)*ease;
-    Object.assign(ghost.style,{visibility:'visible',opacity:String(Math.min(1,p*14,(1-p)*14)),
-      left:x+'px',top:y+'px',width:w+'px',height:h+'px',transform:'rotate('+(swing*6)+'deg)'});
-  }
-  function schedule(){if(frame)return;frame=requestAnimationFrame(()=>{frame=0;renderFlight()})}
-  let mutationFrame=0;
-  const observer=new MutationObserver(()=>{
-    if(mutationFrame)return;
-    mutationFrame=requestAnimationFrame(()=>{
-      mutationFrame=0;syncDestination();needsGhost=true;metrics=null;schedule();
-    });
-  });
-  observer.observe(source,{subtree:true,attributes:true,childList:true,attributeFilter:['class','src','style']});
-  window.addEventListener('scroll',schedule,{passive:true});
-  window.addEventListener('resize',()=>{metrics=null;schedule()},{passive:true});
-  window.addEventListener('load',()=>{metrics=null;schedule()},{once:true});
-  if(typeof ResizeObserver!=='undefined'){
-    const ro=new ResizeObserver(()=>{metrics=null;schedule()});
-    ro.observe(combo);ro.observe(stage);ro.observe(source);ro.observe(destination);
-  }
-  syncDestination();
-  requestAnimationFrame(()=>{measure();renderFlight()});
 })();

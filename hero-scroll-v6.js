@@ -1,16 +1,16 @@
-/* BRASA V6 — one real tray, two scroll flights: Hero → Combo → Beverage. */
+/* BRASA — scroll-driven tray movement through combo, beverages and checkout. */
 (() => {
   'use strict';
   const hero=document.getElementById('plateWrap');
   const plate=hero?.querySelector('.plate-image');
   const combo=document.getElementById('brTrayVisual');
   const drink=document.getElementById('brV4Tray');
+  const checkout=document.getElementById('brCheckoutTray');
   const trayButton=document.getElementById('brTrayButton');
   if(!hero||!plate||!combo||!drink||!trayButton)return;
   plate.src='/assets/brasa_bandeja_vazia.webp';
   plate.alt='Bandeja vermelha BRASA';
   plate.decoding='async';
-  window.__brasaV7MotionActive=true;
   const css="\n/* V6 / BRASA seamless narrative & unified tray */\n#inicio.builder-section{overflow:hidden}\n#plateWrap{width:min(120%,635px)!important;bottom:4px!important;z-index:2!important;transition:opacity .35s ease}\n#plateWrap .plate-image{width:100%!important;height:auto!important;max-height:182px!important;object-fit:contain!important;filter:drop-shadow(0 22px 15px #13060888)!important}\n#scene .burger-pieces{z-index:3}\n#scene .empty-copy{z-index:4}\n#ketchup{isolation:isolate}\n#ketchup::after{content:\"\";position:absolute;left:0;right:0;bottom:-3px;height:clamp(260px,37vw,520px);z-index:12;pointer-events:none;background:linear-gradient(180deg,transparent 0%,#ce4a211a 22%,#e7772f64 48%,#f99c36cf 76%,#ffae3e 100%);mask-image:linear-gradient(180deg,transparent,#000 22%,#000);-webkit-mask-image:linear-gradient(180deg,transparent,#000 22%,#000)}\n#combo.br-combo{margin-top:-3px!important;border:0!important;background:linear-gradient(180deg,#ffae3e 0%,#ffc44e 22%,#ffd365 54%,#ffb445 100%)!important}\n#combo.br-combo::before{inset:0 -5% auto!important;height:clamp(120px,18vw,240px)!important;filter:none!important;background:linear-gradient(180deg,#ffae3e,transparent)!important;opacity:1!important}\n#combo.br-combo .br-combo-wrap{padding-top:clamp(80px,12vw,160px)!important}\n#combo.br-combo .br-combo-eyebrow,#combo.br-combo .br-tray-top,#combo.br-combo .br-tray-subtop{display:none!important}\n#combo.br-combo .br-combo-heading h2{margin-top:0!important}\n#combo.br-combo .br-tray-panel{padding-top:0!important}\n#combo.br-combo .br-tray-panel::after{display:none!important;content:none!important}\n#combo.br-combo .br-tray-visual{margin-top:0!important}\n#combo.br-combo .br-tray-status{color:#713918!important;opacity:.76}\n#brJourneyBridge{height:clamp(250px,32vw,410px)!important;min-height:0!important;margin-top:-3px!important;background:linear-gradient(180deg,#ffb445 0%,#f78c34 17%,#dc542e 47%,#81302a 78%,#290809 100%)!important;overflow:hidden!important}\n#brJourneyBridge::before{background:radial-gradient(ellipse 55% 65% at 55% 38%,#ffcc8042,transparent 80%)!important}\n#brJourneyBridge .br-bridge-inner,#brJourneyBridge .br-bridge-trail{display:none!important}\n#brJourneyBridge::after{content:\"\";position:absolute;bottom:-4px;left:0;right:0;height:60%;background:linear-gradient(180deg,transparent 0%,#4d15183d 40%,#260607 100%);pointer-events:none}\n#brV4Stage{margin-top:-3px!important;border:0!important;scroll-margin-top:0!important;background:#260607!important}\n#brV4Stage .br-v4-top{display:none!important}\n#brV4Stage .br-v4-shell{padding-top:20px!important}\n#brV4Stage .br-v4-left{padding-top:clamp(37px,5vw,72px)!important}\n#brV4Stage .br-v4-columns{margin-top:0}\n.br-journey-ghost{display:none!important}\nhtml.br-journey-flying #brTrayVisual,html.br-journey-flying #brV4Tray{visibility:visible!important}\nhtml.br-flight-from-hero #plateWrap,html.br-flight-from-hero #burgerPieces{visibility:hidden!important}\nhtml.br-flight-from-combo #brTrayVisual,html.br-flight-from-combo #brV4Tray{visibility:hidden!important}\n#brUnifiedTrayGhost{position:fixed;left:0;top:0;z-index:150;visibility:hidden;opacity:0;pointer-events:none;transform-origin:50% 50%;will-change:left,top,width,height,transform,opacity;filter:drop-shadow(0 20px 16px #25070873)}\n#brUnifiedTrayGhost .br-tray-visual{position:relative!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;margin:0!important;overflow:visible!important}\n#brUnifiedTrayGhost .br-tray-placeholder,#brUnifiedTrayGhost [id]{pointer-events:none}\n@media(max-width:900px){#plateWrap{width:min(123%,570px)!important;bottom:8px!important}#plateWrap .plate-image{max-height:145px!important}#combo.br-combo .br-combo-wrap{padding-top:80px!important}#brV4Stage .br-v4-left{padding-top:28px!important}}\n@media(max-width:600px){#plateWrap{width:112%!important;bottom:16px!important}#plateWrap .plate-image{max-height:115px!important}#ketchup::after{height:250px}#combo.br-combo .br-combo-wrap{padding-top:64px!important}#brJourneyBridge{height:270px!important}#brV4Stage .br-v4-shell{padding-top:0!important}}\n@media(prefers-reduced-motion:reduce){#brUnifiedTrayGhost{display:none!important}html.br-flight-from-hero #plateWrap,html.br-flight-from-hero #burgerPieces,html.br-flight-from-combo #brTrayVisual,html.br-flight-from-combo #brV4Tray{visibility:visible!important}}\n";
   const v7Css="\n/* BRASA V7 — unobstructed ketchup route, seamless panels and single-product tray */\n#ketchup .ketchup-action{display:none!important}\n#ketchup::after{height:clamp(350px,45vw,680px)!important;bottom:-3px!important;background:linear-gradient(to bottom,transparent 0%,#ffaf3c03 12%,#fbac4148 38%,#f9a441ab 68%,#ffb343 100%)!important;filter:none!important;mask-image:linear-gradient(to bottom,transparent,#000 17%,#000)!important;pointer-events:none}\n#combo.br-combo{background:linear-gradient(180deg,#ffb343 0%,#ffc54f 23%,#ffd365 56%,#ffb445 100%)!important}\n#brJourneyBridge{height:clamp(175px,20vw,260px)!important;background:linear-gradient(to bottom,#ffb445 0%,#f88d39 21%,#d6582f 49%,#7a2924 72%,#260607 100%)!important;}\n#brJourneyBridge::after{background:linear-gradient(to bottom,transparent,#260607 100%)!important;height:35%!important;bottom:0!important}\n#brV4Stage{background:#260607!important;isolation:isolate}\n#brV4Stage::before{display:block!important;content:\"\";position:absolute;inset:0 0 auto;height:clamp(170px,24vw,320px);z-index:0;pointer-events:none;background:linear-gradient(180deg,#260607 0%,#260607dc 30%,#26060733 73%,transparent 100%);}\n#brV4Stage .br-v5-washes{mask-image:linear-gradient(to bottom,transparent 0%,#0008 16%,#000 37%)!important;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#0008 16%,#000 37%)!important}\n#brV4Stage .br-v4-shell{position:relative;z-index:1}\nhtml.br-flight-from-hero #plateWrap,html.br-flight-from-hero #burgerPieces{visibility:visible!important}\nhtml.br-flight-from-hero #brTrayVisual{visibility:hidden!important}\n#brUnifiedTrayGhost{z-index:42!important;filter:drop-shadow(0 15px 13px #25060773)!important}\n#brUnifiedTrayGhost .br-tray-food{opacity:0}\n#brUnifiedTrayGhost .br-tray-food.is-selected{opacity:1!important;transform:translateY(0) scale(1)!important}\n#brUnifiedTrayGhost .br-tray-burger{opacity:1!important;animation:none!important}\n#brUnifiedTrayGhost .br-drink-can-on-tray{position:absolute;z-index:8;right:-1%;bottom:13%;width:22%;height:70%;object-fit:contain;filter:drop-shadow(0 12px 10px #1c07085c)}\n@media(max-width:700px){#ketchup::after{height:300px!important}#brJourneyBridge{height:185px!important}#brV4Stage::before{height:190px}#brUnifiedTrayGhost{z-index:38!important}}\n@media(prefers-reduced-motion:reduce){html.br-flight-from-hero #brTrayVisual{visibility:visible!important}}\n";
   document.querySelector('#ketchup .ketchup-action')?.remove();
@@ -18,114 +18,191 @@
   style.id='brasa-full-journey-v6-css';style.textContent=css+v7Css;
   document.head.appendChild(style);
 
-  const prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const ghost=document.createElement('div');
-  ghost.id='brUnifiedTrayGhost';ghost.setAttribute('aria-hidden','true');
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const ghost = document.createElement('div');
+  ghost.id = 'brUnifiedTrayGhost';
+  ghost.setAttribute('aria-hidden', 'true');
   document.body.appendChild(ghost);
-  const html=document.documentElement;
-  let raf=0,dirty=true,dimensions=null,lastState='';
-  const clamp=n=>Math.max(0,Math.min(1,n));
-  const lerp=(a,b,t)=>a+(b-a)*t;
-  function waypoint(el){
-    const r=el.getBoundingClientRect();
-    return {x:r.left+window.scrollX,y:r.top+window.scrollY,w:r.width,h:r.height};
+
+  const html = document.documentElement;
+  const docks = [combo, drink, ...(checkout ? [checkout] : [])];
+  const stops = ['hero', 'combo', 'drink', 'checkout'];
+  const ketchup = document.getElementById('ketchup') || hero;
+  const lerp = (from, to, progress) => from + (to - from) * progress;
+  const artwork = ['surface', 'front', 'light', 'burger', 'food--batata', 'food--nuggets', 'food--onion'];
+  const selectors = [...artwork.map(part => '.br-tray-' + part), '.br-drink-can-on-tray'];
+  let frame = 0;
+  let legs = null;
+  let dirty = true;
+  let activeLeg = -1;
+  let flyingParts = [];
+
+  function waypoint(element) {
+    const rect = element.getBoundingClientRect();
+    return { x: rect.left + scrollX, y: rect.top + scrollY, w: rect.width, h: rect.height };
   }
-  function recalc(){
-    const b=waypoint(combo),c=waypoint(drink);
-    const ketchup=document.getElementById('ketchup');
-    const k=waypoint(ketchup||hero);
-    const vh=window.innerHeight||800,vw=window.innerWidth||1400;
-    const startingWidth=Math.min(vw<720?vw*.44:vw*.22,vw<720?230:335);
-    // Enter at the marked X near the upper-right of the ketchup scene.
-    // Stay in the right-hand visual corridor while the photos and copy scroll by.
-    const a={
-      x:Math.max(8,vw*(vw<720?.60:.79)-startingWidth/2),
-      y:k.y+vh*(vw<720?.27:.20),
-      w:startingWidth,h:startingWidth*.69
+
+  function layout(dock, position) {
+    return selectors.map(selector => {
+      const piece = dock.querySelector(selector);
+      if (!piece) return null;
+      const style = getComputedStyle(piece);
+      const burger = selector === '.br-tray-burger';
+      const autoHeight = selector === '.br-tray-surface' || selector === '.br-tray-front';
+      return {
+        x: parseFloat(style.left) / position.w,
+        bottom: parseFloat(style.bottom) / position.h,
+        width: parseFloat(style.width),
+        height: autoHeight ? parseFloat(style.maxHeight) / 100 * position.h : parseFloat(style.height),
+        scale: burger && style.transform !== 'none' ? new DOMMatrixReadOnly(style.transform).a : 1,
+        autoHeight
+      };
+    });
+  }
+
+  function measure() {
+    const vh = innerHeight;
+    const vw = innerWidth;
+    const points = docks.map(waypoint);
+    const ketchupTop = waypoint(ketchup).y;
+    const firstWidth = Math.min(vw < 720 ? vw * .44 : vw * .22, vw < 720 ? 230 : 335);
+    const first = {
+      x: Math.max(8, vw * (vw < 720 ? .60 : .79) - firstWidth / 2),
+      y: ketchupTop + vh * (vw < 720 ? .27 : .20),
+      w: firstWidth,
+      h: firstWidth * .69
     };
-    const firstStart=Math.max(0,k.y-vh*.24);
-    const firstEnd=Math.max(firstStart+vh*.75,b.y-vh*.54);
-    const secondStart=Math.max(firstEnd+8,b.y+b.h-vh*.64);
-    const secondEnd=Math.max(secondStart+vh*.42,c.y-vh*.48);
-    dimensions=[
-      {from:a,to:b,start:firstStart,end:firstEnd},
-      {from:b,to:c,start:secondStart,end:secondEnd}
-    ];
+    const layouts = docks.map((dock, i) => layout(dock, points[i]));
+    const firstLayout = layouts[0].map(piece => piece && ({
+      ...piece,
+      width: piece.width * first.w / points[0].w,
+      height: piece.height * first.h / points[0].h
+    }));
+    let previousEnd = 0;
+    legs = points.map((to, i) => {
+      const from = i === 0 ? first : points[i - 1];
+      const start = i === 0
+        ? Math.max(0, ketchupTop - vh * .24)
+        : Math.max(previousEnd + 8, from.y + from.h - vh * (i === 1 ? .64 : .18));
+      const end = Math.max(start + vh * (i === 0 ? .75 : .25), to.y - vh * (i === 0 ? .54 : .48));
+      previousEnd = end;
+      return { from, to, start, end, fromArt: i === 0 ? firstLayout : layouts[i - 1], toArt: layouts[i] };
+    });
   }
-  function syncVisual(index){
-    const wasEmpty=!combo.classList.contains('is-filled');
-    if(wasEmpty)trayButton.click();
-    const clone=combo.cloneNode(true);
+
+  function syncVisual(index) {
+    const source = index < 2 ? combo : drink.firstElementChild;
+    if (!source) return;
+    const clone = source.cloneNode(true);
     clone.removeAttribute('id');
-    clone.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
+    clone.querySelectorAll('[id]').forEach(element => element.removeAttribute('id'));
     clone.querySelector('.br-tray-placeholder')?.remove();
     ghost.replaceChildren(clone);
-    if(index===1){
-      const can=drink.querySelector('.br-drink-can-on-tray');
-      if(can)clone.append(can.cloneNode(true));
-    }
-    dirty=false;
+    flyingParts = selectors.map(selector => clone.querySelector(selector));
+    dirty = false;
   }
-  function hideFlight(){
-    html.classList.remove('br-flight-from-hero','br-flight-from-combo');
-    ghost.style.visibility='hidden';ghost.style.opacity='0';lastState='';
-  }
-  function update(){
-    if(prefersReduced){hideFlight();return;}
-    if(!dimensions)recalc();
-    const scroll=window.scrollY;
-    let current=null,index=-1,t=0;
-    for(let i=0;i<dimensions.length;i++){
-      const leg=dimensions[i];
-      if(scroll>leg.start&&scroll<leg.end){
-        current=leg;index=i;t=clamp((scroll-leg.start)/(leg.end-leg.start));break;
+
+  function positionArt(leg, width, height, progress) {
+    flyingParts.forEach((piece, i) => {
+      const a = leg.fromArt[i];
+      const b = leg.toArt[i];
+      if (!piece || !a || !b) return;
+      const widthRatio = lerp(a.width / leg.from.w, b.width / leg.to.w, progress);
+      const heightRatio = lerp(a.height / leg.from.h, b.height / leg.to.h, progress);
+      piece.style.setProperty('left', lerp(a.x, b.x, progress) * width + 'px', 'important');
+      piece.style.setProperty('bottom', lerp(a.bottom, b.bottom, progress) * height + 'px', 'important');
+      piece.style.setProperty('width', widthRatio * width + 'px', 'important');
+      if (b.autoHeight) {
+        piece.style.setProperty('max-height', heightRatio * height + 'px', 'important');
+      } else {
+        piece.style.setProperty('height', heightRatio * height + 'px', 'important');
       }
-    }
-    if(!current||!current.from.w||!current.to.w){hideFlight();return;}
-    if(dirty||!ghost.firstElementChild)syncVisual(index);
-    const ease=t*t*(3-2*t);
-    const swing=Math.sin(2*Math.PI*ease)*Math.sin(Math.PI*ease);
-    const a=current.from,b=current.to;
-    const w=lerp(a.w,b.w,ease),h=lerp(a.h,b.h,ease);
-    const pathProgress=index===0?Math.pow(ease,2.65):ease;
-    const centerX=lerp(a.x+a.w/2,b.x+b.w/2,pathProgress)
-      +swing*Math.min(window.innerWidth*(index===0?.025:.065),index===0?25:65);
-    const top=lerp(a.y,b.y,ease)-scroll-Math.sin(Math.PI*ease)*27;
-    const state=index===0?'br-flight-from-hero':'br-flight-from-combo';
-    if(state!==lastState){
-      html.classList.remove('br-flight-from-hero','br-flight-from-combo');
-      html.classList.add(state);lastState=state;
-    }
-    Object.assign(ghost.style,{
-      visibility:'visible',opacity:'1',
-      left:(centerX-w/2)+'px',top:top+'px',width:w+'px',height:h+'px',
-      transform:'rotate('+(swing*6)+'deg)'
+      if (artwork[i] === 'burger') {
+        piece.style.setProperty('transform', 'translateX(-50%) scale(' + lerp(a.scale, b.scale, progress) + ')', 'important');
+      }
     });
   }
-  function queue(){if(raf)return;raf=requestAnimationFrame(()=>{raf=0;update()});}
-  window.addEventListener('scroll',queue,{passive:true});
-  window.addEventListener('resize',()=>{dimensions=null;queue()},{passive:true});
-  window.addEventListener('load',()=>{dimensions=null;queue()},{once:true});
-  if(typeof ResizeObserver!=='undefined'){
-    const resize=new ResizeObserver(()=>{dimensions=null;queue()});
-    resize.observe(hero);resize.observe(combo);resize.observe(drink);
+
+  function park(stop) {
+    html.dataset.brTrayStop = stop;
+    ghost.style.visibility = 'hidden';
+    ghost.style.opacity = '0';
+    activeLeg = -1;
   }
-  // Refresh only when the user modifies the burger or accompanying food.
-  let mutationFrame=0;
-  const observer=new MutationObserver(()=>{
-    if(mutationFrame)return;
-    mutationFrame=requestAnimationFrame(()=>{
-      mutationFrame=0;dirty=true;dimensions=null;
-      if(typeof window.__brasaRefreshBeverageTray==='function') window.__brasaRefreshBeverageTray();
-      queue();
+
+  function update() {
+    if (!legs) measure();
+    const scroll = scrollY;
+    if ((motion.matches || scroll > legs[0].start) && !combo.classList.contains('is-filled')) {
+      trayButton.click();
+      window.__brasaRefreshBeverageTray?.();
+      measure();
+    }
+    if (motion.matches) { park('reduced'); return; }
+
+    const index = legs.findIndex(leg => scroll > leg.start && scroll < leg.end);
+    if (index < 0) {
+      park(stops[legs.filter(leg => scroll >= leg.end).length]);
+      return;
+    }
+    const leg = legs[index];
+    if (!leg.from.w || !leg.to.w) { park(stops[index]); return; }
+    if (dirty || index !== activeLeg) syncVisual(index);
+    const t = (scroll - leg.start) / (leg.end - leg.start);
+    const ease = t * t * (3 - 2 * t);
+    const swing = Math.sin(2 * Math.PI * ease) * Math.sin(Math.PI * ease);
+    const { from, to } = leg;
+    const w = lerp(from.w, to.w, ease);
+    const h = lerp(from.h, to.h, ease);
+    const sideways = index === 0 ? Math.pow(ease, 2.65) : ease;
+    const centerX = lerp(from.x + from.w / 2, to.x + to.w / 2, sideways)
+      + swing * Math.min(innerWidth * .035, 32);
+    const top = lerp(from.y, to.y, ease) - scroll - Math.sin(Math.PI * ease) * 23;
+    positionArt(leg, w, h, ease);
+    Object.assign(ghost.style, {
+      visibility: 'visible',
+      opacity: '1',
+      left: centerX - w / 2 + 'px',
+      top: top + 'px',
+      width: w + 'px',
+      height: h + 'px',
+      transform: 'rotate(' + swing * 4 + 'deg)'
     });
+    html.dataset.brTrayStop = 'flying';
+    activeLeg = index;
+  }
+
+  function queue() {
+    if (!frame) frame = requestAnimationFrame(() => { frame = 0; update(); });
+  }
+  function invalidate() { legs = null; queue(); }
+
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', invalidate, { passive: true });
+  window.addEventListener('load', invalidate, { once: true });
+  motion.addEventListener('change', invalidate);
+  document.fonts?.ready.then(invalidate);
+  if (typeof ResizeObserver !== 'undefined') {
+    const resize = new ResizeObserver(invalidate);
+    [hero, ketchup, ...docks].forEach(element => resize.observe(element));
+  }
+
+  const comboObserver = new MutationObserver(() => {
+    dirty = true;
+    window.__brasaRefreshBeverageTray?.();
+    invalidate();
   });
-  observer.observe(combo,{attributes:true,attributeFilter:['class','style','src'],subtree:true,childList:true});
-  const beverageObserver=new MutationObserver(()=>{dirty=true;queue()});
-  beverageObserver.observe(drink,{attributes:true,attributeFilter:['class','style','src'],subtree:true,childList:true});
-  const ingredients=document.getElementById('burgerPieces');
-  if(ingredients)observer.observe(ingredients,{attributes:true,attributeFilter:['class','style','src'],subtree:true,childList:true});
-  requestAnimationFrame(()=>{recalc();update()});
+  comboObserver.observe(combo, { attributes: true, attributeFilter: ['class', 'style', 'src'], subtree: true, childList: true });
+  const ingredients = document.getElementById('burgerPieces');
+  if (ingredients) {
+    new MutationObserver(() => {
+      if (combo.classList.contains('is-filled')) trayButton.click();
+    }).observe(ingredients, { attributes: true, attributeFilter: ['class'], subtree: true, childList: true });
+  }
+  new MutationObserver(() => { dirty = true; invalidate(); }).observe(drink, {
+    attributes: true, attributeFilter: ['data-confirmed-drink'], childList: true
+  });
+  update();
 })();
 
 /* BRASA V8: scroll handwriting and simplified controls. */

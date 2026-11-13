@@ -325,7 +325,7 @@
         const img = document.createElement('img');
         img.src = src; img.alt = ''; img.decoding = 'async';
         img.dataset.burgerLayer = key;
-        Object.assign(img.style, { width: `${w}px`, height: `${h}px`, bottom: `${baseBottom}px`, zIndex: String(index + 3) });
+        Object.assign(img.style, { width: `${w / 440 * 100}%`, height: `${h / 560 * 100}%`, bottom: `${baseBottom / 560 * 100}%`, zIndex: String(index + 3) });
         fragments.push(img);
       }
       baseBottom += advance;
@@ -371,11 +371,9 @@
     render();
   }));
   trayButton.addEventListener('click',() => {
-    if (!placed) {
-      if (!putBurgerOnTray()) { trayStatus.textContent='NÃO FOI POSSÍVEL CARREGAR O SMASH. ATUALIZA A PÁGINA.';return; }
-      placed = true;
-      trayVisual.classList.add('is-filled');
-    }
+    if (!putBurgerOnTray()) { trayStatus.textContent='NÃO FOI POSSÍVEL CARREGAR O SMASH. ATUALIZA A PÁGINA.';return; }
+    placed = true;
+    trayVisual.classList.add('is-filled');
     render();
     trayButton.querySelector('span').textContent = 'ATUALIZAR A MINHA BANDEJA';
     trayStatus.textContent = selected.size ? 'SMASH E ACOMPANHAMENTOS COLOCADOS NA BANDEJA!' : 'SMASH COLOCADO! ESCOLHE AGORA OS ACOMPANHAMENTOS.';
