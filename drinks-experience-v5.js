@@ -279,3 +279,95 @@
   updateTray();
   select(0);
 })();
+
+/* Scroll-driven migration of the assembled tray to a standalone beverage section. */
+(() => {
+  'use strict';
+  const combo=document.getElementById('combo');
+  const stage=document.getElementById('brV4Stage');
+  const source=document.getElementById('brTrayVisual');
+  const destination=document.getElementById('brV4Tray');
+  const burger=document.getElementById('brTrayBurger');
+  const trayButton=document.getElementById('brTrayButton');
+  if(!combo||!stage||!source||!destination||!trayButton)return;
+  const oldDrinkButton=document.getElementById('brChooseDrink');
+  if(oldDrinkButton)oldDrinkButton.remove();
+  const ss=document.createElement('style');ss.id='brasa-journey-styles';
+  ss.textContent="\n/* BRASA / Scroll journey */\n.br-combo .br-tray-panel{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important;min-height:0!important;padding:12px 2px 0!important;color:#57200c!important}\n.br-combo .br-tray-panel::before{display:none!important}\n.br-combo .br-tray-top{border-bottom:1px solid #75341d58!important;color:#63230b!important;font-size:13px!important}\n.br-combo .br-tray-subtop,.br-combo .br-tray-status{color:#73351c!important}\n.br-combo .br-tray-chip{background:#fff0ba96!important;color:#622b12!important;border-color:#7b391a4d!important}\n.br-combo .br-drink-tray-choice,.br-combo .br-pick-drink{display:none!important}\n.br-combo .br-tray-visual{margin:13px -4px 15px!important}\n.br-combo .br-tray-button{background:linear-gradient(108deg,#fff1bf,#ffd46f)!important;color:#50190b!important;border-color:#fff2bf!important;box-shadow:0 13px 29px #a54c1d30!important}\n.br-combo .br-tray-button:hover{transform:translateY(-4px)!important}\n.br-combo .br-tray-panel::after{content:\"↓ DESCE PARA ESCOLHER A TUA BEBIDA\";display:block;text-align:center;margin:20px auto 4px;color:#7d3316;font:900 11px/1.5 Inter,Arial,sans-serif;letter-spacing:.14em}\n#brJourneyBridge{position:relative;isolation:isolate;overflow:hidden;height:clamp(440px,52vw,650px);margin-top:-2px;background:linear-gradient(180deg,#ff9f2f 0%,#f7842d 19%,#db5127 49%,#85221d 76%,#270609 100%);user-select:none}\n#brJourneyBridge::before{content:\"\";position:absolute;inset:-8%;background:radial-gradient(ellipse 50% 50% at 68% 35%,#ffe2a65b,transparent 70%),radial-gradient(ellipse 51% 38% at 18% 73%,#ffcb6e4d,transparent 72%);filter:blur(28px);pointer-events:none}\n#brJourneyBridge .br-bridge-inner{position:relative;z-index:2;width:min(92%,1440px);height:100%;box-sizing:border-box;margin:auto;padding:clamp(43px,6vw,88px) 0 50px;display:flex;flex-direction:column;justify-content:space-between}\n#brJourneyBridge .br-bridge-overline{color:#663019;font:900 11px/1.3 Inter,Arial,sans-serif;letter-spacing:.22em}\n#brJourneyBridge .br-bridge-title{color:#fff0ca;max-width:970px;font:900 clamp(62px,9.7vw,150px)/.82 'Barlow Condensed',Impact,sans-serif;letter-spacing:-.035em;text-shadow:0 8px 28px #3c0a1045;margin:0}\n#brJourneyBridge .br-bridge-title span{display:block;color:#fff9e3}\n#brJourneyBridge .br-bridge-caption{align-self:flex-end;color:#ffe0a4;font:900 11px/1.3 Inter,Arial,sans-serif;letter-spacing:.14em}\n#brJourneyBridge .br-bridge-trail{position:absolute;inset:0;width:100%;height:100%;stroke:#ffe6a86b;stroke-width:2;stroke-dasharray:9 18;fill:none;pointer-events:none}\n#brV4Stage{display:block!important;margin-top:0!important;scroll-margin-top:0;background:#260608}\n.br-journey-ghost{position:fixed;z-index:99;left:0;top:0;width:100px;height:100px;opacity:0;visibility:hidden;pointer-events:none;transform-origin:center;will-change:left,top,width,height,transform;filter:drop-shadow(0 20px 14px #29040873)}\n.br-journey-ghost .br-tray-visual{position:relative!important;height:100%!important;width:100%!important;min-width:0!important;min-height:0!important;margin:0!important;overflow:visible!important}\n.br-journey-ghost .br-tray-placeholder{display:none!important}\nhtml.br-journey-flying #brTrayVisual,html.br-journey-flying #brV4Tray{visibility:hidden!important}\n@media(max-width:900px){\n #brJourneyBridge{height:470px}\n #brJourneyBridge .br-bridge-title{font-size:clamp(64px,12vw,105px)}\n #brV4Stage .br-v4-tray{display:block!important;transform:none!important;width:min(100%,440px)!important;height:220px!important;margin:12px auto 0!important}\n #brV4Stage .br-v4-tray-caption{display:block!important;text-align:center!important;margin:0 auto 20px!important}\n #brV4Stage .br-v4-left{width:100%}\n}\n@media(max-width:600px){\n #brJourneyBridge{height:380px}\n #brJourneyBridge .br-bridge-title{font-size:clamp(55px,13vw,82px)}\n #brJourneyBridge .br-bridge-overline,#brJourneyBridge .br-bridge-caption{font-size:9px}\n #brV4Stage .br-v4-tray{height:195px!important}\n #brV4Stage .br-v4-tray-caption{font-size:9px}\n}\n@media(prefers-reduced-motion:reduce){.br-journey-ghost{display:none!important}html.br-journey-flying #brTrayVisual,html.br-journey-flying #brV4Tray{visibility:visible!important}}\n";
+  document.head.appendChild(ss);
+  combo.insertAdjacentHTML('afterend',
+    '<div id="brJourneyBridge" aria-hidden="true">'
+    +'<svg class="br-bridge-trail" viewBox="0 0 1100 520" preserveAspectRatio="none"><path d="M 870 10 C 220 80, 850 190, 380 275 S 790 410, 230 515"/></svg>'
+    +'<div class="br-bridge-inner"><span class="br-bridge-overline">BRASA. / DO SMASH AO ÚLTIMO GOLE</span>'
+    +'<h2 class="br-bridge-title">O TEU COMBO <span>VAI CONTIGO.</span></h2>'
+    +'<span class="br-bridge-caption">CONTINUA A DESLIZAR ↓</span></div></div>');
+  const food={batata:['Batata frita','/assets/brasa_batata_frita.webp'],nuggets:['Nuggets','/assets/brasa_nuggets.webp'],onion:['Onion rings','/assets/brasa_onion_rings.webp']};
+  const keys=Object.keys(food);
+  const label=document.getElementById('brV4TrayCaption');
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function chosen(){return keys.filter(k=>source.querySelector('.br-tray-food--'+k)?.classList.contains('is-selected'))}
+  function syncDestination(){
+    const use=chosen();
+    destination.innerHTML='<img class="br-v4-tray-base" src="/assets/brasa_bandeja_vazia.webp" alt="Bandeja BRASA" decoding="async">'
+      +'<div class="br-v4-burger" aria-hidden="true">'+(burger?.innerHTML||'')+'</div>'
+      +use.map(k=>'<img class="br-v4-food br-v4-food--'+k+'" src="'+food[k][1]+'" alt="" decoding="async">').join('')
+      +'<img class="br-v4-tray-lip" src="/assets/brasa_bandeja_vazia.webp" alt="" aria-hidden="true">';
+    if(label)label.textContent=use.length?'SMASH + '+use.map(k=>food[k][0]).join(' · ').toUpperCase():'O TEU SMASH JÁ ESTÁ NA BANDEJA.';
+  }
+  const ghost=document.createElement('div');
+  ghost.className='br-journey-ghost';ghost.setAttribute('aria-hidden','true');document.body.appendChild(ghost);
+  let needsGhost=true,metrics=null,frame=0;
+  function makeGhost(){
+    ghost.replaceChildren();
+    const copy=source.cloneNode(true);copy.id='';copy.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
+    copy.querySelector('.br-tray-placeholder')?.remove();
+    ghost.append(copy);needsGhost=false;
+  }
+  function measure(){
+    const scroll=window.scrollY,src=source.getBoundingClientRect(),dst=destination.getBoundingClientRect();
+    const sy=src.top+scroll,dy=dst.top+scroll,vh=window.innerHeight||800;
+    const start=sy-vh*.56;
+    metrics={start,end:Math.max(start+320,dy-vh*.48),sy,dy,
+      sx:src.left+window.scrollX,dx:dst.left+window.scrollX,
+      sw:src.width,sh:src.height,dw:dst.width,dh:dst.height};
+  }
+  function renderFlight(){
+    if(reduced)return;
+    if(!metrics)measure();
+    const m=metrics,scroll=window.scrollY;
+    const p=Math.max(0,Math.min(1,(scroll-m.start)/(m.end-m.start)));
+    if(p<=0||p>=1||m.sw<=0||m.dw<=0){
+      document.documentElement.classList.remove('br-journey-flying');
+      ghost.style.visibility='hidden';ghost.style.opacity='0';return;
+    }
+    if(!source.classList.contains('is-filled')){
+      trayButton.click();syncDestination();needsGhost=true;
+    }
+    if(needsGhost)makeGhost();
+    document.documentElement.classList.add('br-journey-flying');
+    const ease=p*p*(3-2*p),swing=Math.sin(Math.PI*2*ease)*Math.sin(Math.PI*ease);
+    const x=m.sx+(m.dx-m.sx)*ease+swing*Math.min(83,window.innerWidth*.08);
+    const y=m.sy+(m.dy-m.sy)*ease-scroll-Math.sin(Math.PI*ease)*23;
+    const w=m.sw+(m.dw-m.sw)*ease,h=m.sh+(m.dh-m.sh)*ease;
+    Object.assign(ghost.style,{visibility:'visible',opacity:String(Math.min(1,p*14,(1-p)*14)),
+      left:x+'px',top:y+'px',width:w+'px',height:h+'px',transform:'rotate('+(swing*6)+'deg)'});
+  }
+  function schedule(){if(frame)return;frame=requestAnimationFrame(()=>{frame=0;renderFlight()})}
+  let mutationFrame=0;
+  const observer=new MutationObserver(()=>{
+    if(mutationFrame)return;
+    mutationFrame=requestAnimationFrame(()=>{
+      mutationFrame=0;syncDestination();needsGhost=true;metrics=null;schedule();
+    });
+  });
+  observer.observe(source,{subtree:true,attributes:true,childList:true,attributeFilter:['class','src','style']});
+  window.addEventListener('scroll',schedule,{passive:true});
+  window.addEventListener('resize',()=>{metrics=null;schedule()},{passive:true});
+  window.addEventListener('load',()=>{metrics=null;schedule()},{once:true});
+  if(typeof ResizeObserver!=='undefined'){
+    const ro=new ResizeObserver(()=>{metrics=null;schedule()});
+    ro.observe(combo);ro.observe(stage);ro.observe(source);ro.observe(destination);
+  }
+  syncDestination();
+  requestAnimationFrame(()=>{measure();renderFlight()});
+})();
