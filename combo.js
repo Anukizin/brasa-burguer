@@ -77,6 +77,58 @@
   @media(max-width:860px){.br-combo-main{grid-template-columns:1fr}.br-combo-choices{grid-template-columns:repeat(2,minmax(0,1fr))}.br-tray-panel{min-height:550px}.br-tray-visual{width:min(100%,600px);margin:20px auto;height:360px}.br-tray-burger{transform:translateX(-50%) scale(.56)}@keyframes br-tray-land{from{opacity:0;transform:translateX(-50%) translateY(-55px) scale(.45)}to{opacity:1;transform:translateX(-50%) scale(.56)}}}
   @media(max-width:620px){.br-combo-wrap{width:calc(100% - 30px);padding:170px 0 30px}.br-combo-heading{display:block;margin-bottom:28px}.br-combo-heading h2{font-size:clamp(66px,14vw,102px);margin:20px 0 22px}.br-combo-heading p{max-width:430px;font-size:16px}.br-combo-eyebrow{font-size:10px}.br-combo-choices{gap:10px}.br-combo-choice{min-height:226px;padding:15px 13px 16px;border-radius:16px}.br-combo-category{font-size:9px}.br-combo-choice-copy strong{font-size:clamp(30px,7vw,45px)}.br-combo-choice-copy small{font-size:10px;margin-top:7px}.br-combo-plus{width:31px;height:31px;font-size:23px}.br-combo-choice[data-combo=batata] .br-combo-card-photo{width:67%;right:-2%;top:10%;height:62%}.br-combo-choice[data-combo=nuggets] .br-combo-card-photo,.br-combo-choice[data-combo=onion] .br-combo-card-photo{width:82%;right:-7%}.br-combo-all-images{inset:9% -6% 20%}.br-tray-panel{padding:21px 17px 22px;border-radius:18px;min-height:510px}.br-tray-visual{height:310px;margin:10px -8px}.br-tray-burger{transform:translateX(-50%) scale(.44)}@keyframes br-tray-land{from{opacity:0;transform:translateX(-50%) translateY(-42px) scale(.34)}to{opacity:1;transform:translateX(-50%) scale(.44)}}.br-tray-food--batata{left:-4%;width:34%}.br-tray-food--nuggets{width:34%;right:-2%}.br-tray-food--onion{width:33%;right:3%}.br-combo-footer{font-size:9px}}
   @media(prefers-reduced-motion:reduce){.br-tray-visual.is-filled .br-tray-burger{animation:none}.br-tray-food,.br-combo-choice,.br-tray-button{transition:none!important}}
+
+  /* Beverage step: real isolated product photography, animated flavour-based backdrop. */
+  .br-combo .br-drink-washes{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;opacity:0;transition:opacity .52s ease}
+  .br-combo.is-drink-stage .br-drink-washes{opacity:1}
+  .br-combo .br-drink-wash{position:absolute;inset:-3%;opacity:0;transition:opacity .7s ease,transform 1.1s cubic-bezier(.25,1,.4,1);transform:scale(1.04);filter:saturate(1.1)}
+  .br-combo .br-drink-wash.is-active{opacity:1;transform:scale(1)}
+  .br-drink-wash--cola{background:radial-gradient(ellipse at 88% 40%,rgba(255,160,66,.58),transparent 42%),linear-gradient(110deg,#ffbd41,#f07125 42%,#c12514 79%,#6a160d)}
+  .br-drink-wash--laranja{background:radial-gradient(ellipse at 83% 25%,rgba(255,245,111,.75),transparent 39%),linear-gradient(120deg,#ffe05b 0%,#ffae21 45%,#ed6d15 81%,#8a3210)}
+  .br-drink-wash--uva{background:radial-gradient(ellipse at 87% 20%,rgba(238,170,255,.66),transparent 39%),linear-gradient(110deg,#d58ce0 0%,#9656c7 40%,#622690 80%,#311044)}
+  .br-drink-wash--limao{background:radial-gradient(ellipse at 75% 25%,rgba(255,247,123,.77),transparent 43%),linear-gradient(113deg,#f2f18a 0%,#a8d648 46%,#5bb435 82%,#244f1b)}
+  .br-combo.is-drink-stage{transition:background .65s ease;background:#5e210d}
+  .br-combo.is-drink-stage::before{opacity:.08}
+  .br-combo.is-drink-stage::after{opacity:.05}
+  .br-combo.is-drink-stage .br-combo-main{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:start;gap:22px}
+  .br-combo.is-drink-stage .br-combo-choices{display:none}
+  .br-combo.is-drink-stage .br-tray-panel{grid-column:1;min-height:600px;animation:br-card-enter .62s cubic-bezier(.2,1,.3,1) both}
+  .br-combo.is-drink-stage .br-combo-heading h2{font-size:clamp(74px,8.1vw,130px)}
+  .br-combo.is-drink-stage .br-combo-heading p{color:#461c10}
+  .br-combo.is-drink-stage .br-combo-eyebrow{color:#562012}
+  .br-drinks-panel{display:none;min-width:0;overflow:hidden;padding:26px 25px 28px;border-radius:23px;min-height:600px;background:linear-gradient(160deg,rgba(68,17,10,.96),rgba(57,14,13,.98));border:1px solid #ffc56d69;box-shadow:0 19px 42px #5b190e58;color:#ffe6b4}
+  .br-combo.is-drink-stage .br-drinks-panel{display:flex;flex-direction:column;animation:br-card-enter .7s .08s cubic-bezier(.2,1,.3,1) both}
+  @keyframes br-card-enter{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+  .br-drinks-top{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #ffd68254;padding-bottom:20px}
+  .br-drinks-top span{font:900 12px/1.4 'Inter',Arial,sans-serif;letter-spacing:.17em}
+  .br-drinks-back{cursor:pointer;color:#ffcf7a;background:#fff0c014;border:1px solid #ffde9b69;border-radius:100px;padding:9px 14px;font:800 10px/1.3 'Inter',Arial,sans-serif;letter-spacing:.05em;transition:background .25s,color .25s}
+  .br-drinks-back:hover{background:#ffd266;color:#4b180c}
+  .br-drinks-intro{font:650 14px/1.5 'Inter',Arial,sans-serif;margin:22px 0 19px;color:#f5b879}
+  .br-drinks-options{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;flex:1}
+  .br-drink-card{position:relative;min-height:325px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:10px;border-radius:16px;padding:12px 6px 18px;overflow:hidden;cursor:pointer;color:#fff1cb;background:linear-gradient(165deg,rgba(255,224,166,.11),rgba(60,15,12,.5));border:1.5px solid #ffc87256;box-shadow:inset 0 1px #ffefba24;transition:transform .3s cubic-bezier(.2,1,.3,1),border-color .3s,background .3s,box-shadow .3s}
+  .br-drink-card::before{content:"";position:absolute;left:10%;right:10%;top:9%;height:68%;z-index:0;border-radius:50%;background:radial-gradient(circle,var(--br-accent-soft),transparent 69%);filter:blur(16px);opacity:.8;pointer-events:none}
+  .br-drink-card:hover{transform:translateY(-6px);border-color:#ffe5a8;box-shadow:0 17px 26px #26090778,inset 0 1px #fff5c15f}
+  .br-drink-card:focus-visible,.br-drinks-back:focus-visible,.br-pick-drink:focus-visible{outline:3px solid #ffe89a;outline-offset:4px}
+  .br-drink-card[aria-pressed=true]{background:linear-gradient(170deg,rgba(255,222,157,.27),rgba(75,16,10,.55));border:2px solid #fff0bc;box-shadow:inset 0 0 0 2px var(--br-accent-soft),0 13px 28px #220807aa}
+  .br-drink-card img{position:relative;z-index:1;width:100%;max-width:150px;height:228px;object-fit:contain;filter:drop-shadow(0 14px 12px #1307079c);transform:rotate(-2deg);transition:transform .35s cubic-bezier(.2,1,.3,1)}
+  .br-drink-card:hover img,.br-drink-card[aria-pressed=true] img{transform:translateY(-10px) rotate(2deg) scale(1.05)}
+  .br-drink-card strong{position:relative;z-index:1;font:900 clamp(15px,1.4vw,22px)/1 'Barlow Condensed',Impact,sans-serif;letter-spacing:.04em;white-space:nowrap}
+  .br-drink-check{position:absolute;z-index:2;right:9px;top:10px;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:var(--br-accent);color:#48150c;font:900 16px Arial,sans-serif;opacity:0;transform:scale(.6);transition:opacity .25s,transform .25s}
+  .br-drink-card[aria-pressed=true] .br-drink-check{opacity:1;transform:scale(1)}
+  .br-drink-result{display:flex;align-items:center;justify-content:space-between;gap:15px;min-height:55px;margin-top:22px;padding:13px 16px;border-radius:13px;background:#23090467;border:1px solid #ffca8e36;font:800 11px/1.5 'Inter',Arial,sans-serif;letter-spacing:.08em}
+  .br-drink-result strong{font-size:13px;color:#ffe089}
+  .br-pick-drink{display:none;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:59px;margin:12px 0 0;padding:8px 9px 8px 20px;border:1px solid #ffedaf;border-radius:100px;background:linear-gradient(110deg,#ffd97d,#f5a742);color:#511b0a;cursor:pointer;font:900 13px 'Inter',Arial,sans-serif;box-shadow:0 8px 0 #290d0737;transition:transform .3s,background .3s}
+  .br-pick-drink:hover{transform:translateY(-3px);background:#ffe8a8}
+  .br-pick-drink i{width:42px;height:42px;flex:none;display:grid;place-items:center;border-radius:50%;font:normal 22px Arial,sans-serif;background:#5d1d0e;color:#ffe099}
+  .br-pick-drink.is-visible{display:flex}
+  .br-combo.is-drink-stage .br-tray-button{display:none}
+  .br-combo.is-drink-stage .br-pick-drink{display:none}
+  .br-drink-tray-choice{display:none;padding:10px 0;color:#ffdc83;font:900 11px 'Inter',Arial,sans-serif;letter-spacing:.1em}
+  .br-drink-tray-choice.is-visible{display:block}
+  @media(max-width:1180px){.br-combo.is-drink-stage .br-combo-main{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}.br-drinks-panel{padding:22px 16px}.br-drinks-options{grid-template-columns:repeat(2,minmax(0,1fr))}.br-drink-card{min-height:225px}.br-drink-card img{height:165px}}
+  @media(max-width:900px){.br-combo.is-drink-stage .br-combo-main{grid-template-columns:1fr}.br-combo.is-drink-stage .br-tray-panel{grid-column:auto;min-height:540px}.br-combo.is-drink-stage .br-drinks-panel{min-height:0}.br-drinks-options{grid-template-columns:repeat(4,minmax(0,1fr))}.br-drink-card{min-height:260px}.br-drink-card img{height:195px}}
+  @media(max-width:620px){.br-combo.is-drink-stage .br-combo-heading h2{font-size:clamp(65px,13vw,94px)}.br-combo.is-drink-stage .br-tray-panel{min-height:485px}.br-drinks-options{grid-template-columns:repeat(2,minmax(0,1fr))}.br-drink-card{min-height:230px}.br-drink-card img{height:167px}.br-drinks-back{font-size:9px;padding:8px 9px}.br-drinks-panel{padding:19px 13px}.br-drink-result{font-size:10px}}
+  @media(prefers-reduced-motion:reduce){.br-combo .br-drink-wash,.br-drink-card,.br-drink-card img,.br-combo.is-drink-stage .br-tray-panel,.br-combo.is-drink-stage .br-drinks-panel{transition:none!important;animation:none!important}}
   `;
   const style = document.createElement('style');
   style.id = 'brasa-combo-tray-style';
@@ -96,6 +148,10 @@
   ];
   const photo = (src, cls, alt = '') => `<img class="${cls}" src="${src}" alt="${alt}" loading="lazy" decoding="async">`;
   const cardsHtml = cards.map(item => `<button type="button" class="br-combo-choice" data-combo="${item.key}" aria-pressed="false" aria-label="Adicionar ${item.key === 'batata' ? 'batata frita' : item.key === 'onion' ? 'onion rings' : 'nuggets'} ao combo"><span class="br-combo-category">${item.category}</span>${photo(asset[item.key],'br-combo-card-photo')}<span class="br-combo-choice-copy"><span><strong>${item.title}</strong><small>${item.description}</small></span><span class="br-combo-plus" aria-hidden="true">+</span></span></button>`).join('');
+  const drinkNames = { cola: 'COLA', laranja: 'LARANJA', uva: 'UVA', limao: 'LIMÃO' };
+  const drinkColors = { cola: '#ffaf5c', laranja: '#ffc454', uva: '#d9a0ff', limao: '#c0f371' };
+  const drinkKeys = Object.keys(drinkNames);
+  const drinkCardsHtml = drinkKeys.map(key => `<button type="button" class="br-drink-card" data-drink="${key}" aria-pressed="false" aria-label="Escolher refrigerante de ${drinkNames[key]}"><img src="/assets/brasa_refrigerante_${key}.webp" alt="Refrigerante ${drinkNames[key]}, lata BRASA com splash e gelo" loading="lazy" decoding="async"><strong>${drinkNames[key]}</strong><span class="br-drink-check" aria-hidden="true">✓</span></button>`).join('');
   root.className = 'combo-section br-combo';
   root.innerHTML = `
     <div class="br-combo-wrap">
@@ -123,12 +179,21 @@
             ${cards.map(c => photo(asset[c.key],`br-tray-food br-tray-food--${c.key}`)).join('')}
           </div>
           <button type="button" class="br-tray-button" id="brTrayButton"><span>COLOCAR OS MEUS ITENS</span><i aria-hidden="true">↗</i></button>
+          <button type="button" class="br-pick-drink" id="brChooseDrink"><span>ESCOLHER BEBIDA</span><i aria-hidden="true">↗</i></button>
+          <div class="br-drink-tray-choice" id="brDrinkTrayChoice" aria-live="polite"></div>
           <div class="br-tray-status" id="brTrayStatus" role="status" aria-live="polite">O HAMBÚRGUER ORIGINAL DA BRASA ENTRA AQUI.</div>
         </aside>
+        <section class="br-drinks-panel" id="brDrinksPanel" aria-label="Escolher o refrigerante do combo">
+          <div class="br-drinks-top"><span>ESCOLHE A TUA BEBIDA</span><button type="button" class="br-drinks-back" id="brBackToExtras">↖ VOLTAR AOS ITENS</button></div>
+          <p class="br-drinks-intro">Quatro sabores. Escolhe o que combina melhor com o teu smash.</p>
+          <div class="br-drinks-options" role="group" aria-label="Sabores de refrigerante">${drinkCardsHtml}</div>
+          <div class="br-drink-result" role="status" aria-live="polite"><span>O TEU REFRIGERANTE</span><strong id="brSelectedDrink">ESCOLHE O SABOR</strong></div>
+        </section>
       </div>
       <div class="br-combo-footer"><span>FEITO COM FOGO. FEITO À TUA MANEIRA.</span><a href="#inicio">↖ VOLTAR AO SMASH</a></div>
     </div>`;
 
+  root.insertAdjacentHTML('afterbegin', `<div class="br-drink-washes" aria-hidden="true">${drinkKeys.map(key=>`<span class="br-drink-wash br-drink-wash--${key}" data-wash="${key}"></span>`).join('')}</div>`);
   const labels = { batata: 'Batata frita', nuggets: 'Nuggets', onion: 'Onion rings' };
   const options = Object.keys(labels);
   const selected = new Set();
@@ -139,6 +204,18 @@
   const trayButton = document.getElementById('brTrayButton');
   const trayChoices = document.getElementById('brTrayChoices');
   const trayStatus = document.getElementById('brTrayStatus');
+  const chooseDrinkButton = document.getElementById('brChooseDrink');
+  const backToExtrasButton = document.getElementById('brBackToExtras');
+  const selectedDrinkResult = document.getElementById('brSelectedDrink');
+  const drinkTrayChoice = document.getElementById('brDrinkTrayChoice');
+  const drinkButtons = [...root.querySelectorAll('[data-drink]')];
+  const drinkWashes = [...root.querySelectorAll('[data-wash]')];
+  const comboTitle = root.querySelector('.br-combo-heading h2');
+  const comboEyebrow = root.querySelector('.br-combo-eyebrow');
+  const comboDescription = root.querySelector('.br-combo-heading p');
+  const originalHeading = { title: comboTitle.innerHTML, eyebrow: comboEyebrow.textContent, description: comboDescription.innerHTML };
+  let chosenDrink = null;
+
   const layerOrder = [
     ['base',345,132,44], ['patty',357,170,63], ['cheddar',352,142,31],
     ['bacon',359,147,37], ['onion',353,123,28], ['tomato',360,169,40],
@@ -194,6 +271,7 @@
       if (el) el.classList.toggle('is-selected',selected.has(key));
     });
     if (placed) {
+      chooseDrinkButton.classList.add('is-visible');
       trayStatus.textContent = selected.size ? 'A TUA BANDEJA ESTÁ PRONTA. PODES CONTINUAR A ESCOLHER.' : 'O TEU SMASH ESTÁ NA BANDEJA. ESCOLHE OS EXTRAS.';
       trayVisual.setAttribute('aria-label',`Smash da BRASA na bandeja${selected.size ? ' com '+options.filter(key=>selected.has(key)).map(key=>labels[key]).join(', ') : ''}.`);
     }
@@ -216,6 +294,50 @@
     render();
     trayButton.querySelector('span').textContent = 'ATUALIZAR A MINHA BANDEJA';
     trayStatus.textContent = selected.size ? 'SMASH E ACOMPANHAMENTOS COLOCADOS NA BANDEJA!' : 'SMASH COLOCADO! ESCOLHE AGORA OS ACOMPANHAMENTOS.';
+  });
+  function showDrinkStage() {
+    if (!placed) {
+      if (!putBurgerOnTray()) { trayStatus.textContent='NÃO FOI POSSÍVEL CARREGAR O SMASH. ATUALIZA A PÁGINA.'; return; }
+      placed=true;trayVisual.classList.add('is-filled');
+    }
+    root.classList.add('is-drink-stage');
+    comboEyebrow.textContent='REFRESCA O TEU COMBO';
+    comboTitle.innerHTML='ESCOLHE <span>A TUA</span><br>BEBIDA.';
+    comboDescription.innerHTML='O teu smash e os acompanhamentos ficam na bandeja. <strong>Agora escolhe o refrigerante.</strong>';
+    setDrinkBackdrop(chosenDrink || 'cola');
+    trayStatus.textContent='O TEU SMASH E OS ACOMPANHAMENTOS ESTÃO NA BANDEJA.';
+    root.querySelector('#brDrinksPanel').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'});
+  }
+  function setDrinkBackdrop(key) {
+    drinkWashes.forEach(wash => wash.classList.toggle('is-active', wash.dataset.wash === key));
+  }
+  function selectDrink(key) {
+    chosenDrink=key;
+    setDrinkBackdrop(key);
+    drinkButtons.forEach(button => {
+      const active=button.dataset.drink===key;
+      button.setAttribute('aria-pressed',String(active));
+      button.style.setProperty('--br-accent',drinkColors[button.dataset.drink]);
+      button.style.setProperty('--br-accent-soft',drinkColors[button.dataset.drink]+'6b');
+    });
+    selectedDrinkResult.textContent=drinkNames[key]+' ✓';
+    drinkTrayChoice.textContent='BEBIDA: '+drinkNames[key];
+    drinkTrayChoice.classList.add('is-visible');
+    trayStatus.textContent='COMBO COMPLETO COM '+drinkNames[key]+'. PODES TROCAR DE SABOR.';
+  }
+  chooseDrinkButton.addEventListener('click',showDrinkStage);
+  backToExtrasButton.addEventListener('click',() => {
+    root.classList.remove('is-drink-stage');
+    comboTitle.innerHTML=originalHeading.title;
+    comboEyebrow.textContent=originalHeading.eyebrow;
+    comboDescription.innerHTML=originalHeading.description;
+    render();
+    trayStatus.textContent='OS ITENS CONTINUAM NA BANDEJA. ESCOLHE A TUA BEBIDA QUANDO QUISERES.';
+  });
+  drinkButtons.forEach(button=>button.addEventListener('click',()=>selectDrink(button.dataset.drink)));
+  drinkButtons.forEach(button => {
+    button.style.setProperty('--br-accent',drinkColors[button.dataset.drink]);
+    button.style.setProperty('--br-accent-soft',drinkColors[button.dataset.drink]+'6b');
   });
   render();
 })();
