@@ -58,7 +58,6 @@
   #brV4Stage .br-v4-display{position:relative;width:100%;height:515px;flex:none;touch-action:pan-y;user-select:none;cursor:grab;isolation:isolate;outline-offset:-3px}
   #brV4Stage .br-v4-display:active{cursor:grabbing}
   #brV4Stage .br-v4-display::before{content:'';position:absolute;left:24%;bottom:12px;width:55%;height:27px;border-radius:50%;background:radial-gradient(ellipse,var(--v4-accent) 0%,var(--v4-red) 25%,transparent 74%);filter:blur(13px);opacity:.96}
-  #brV4Stage .br-v4-display::after{content:'';position:absolute;left:37%;bottom:0;width:31%;height:20px;border:3px solid var(--v4-accent);border-radius:50%;box-shadow:0 0 16px var(--v4-accent),inset 0 0 12px var(--v4-accent);opacity:.95;transition:border-color .7s,box-shadow .7s}
   #brV4Stage .br-v4-can{position:absolute;left:var(--pos);top:51%;width:clamp(170px,21vw,340px);height:490px;z-index:var(--layer);transform:translate(-50%,-50%) scale(var(--scale)) rotate(var(--tilt));opacity:var(--opacity);filter:blur(var(--blur)) drop-shadow(0 18px 10px #1d02068b);transition:left .82s cubic-bezier(.2,.9,.2,1),transform .82s cubic-bezier(.2,.9,.2,1),opacity .7s ease,filter .7s ease;pointer-events:none;will-change:transform,left}
   #brV4Stage .br-v4-can img{width:100%;height:100%;object-fit:contain;display:block;filter:saturate(1.09) contrast(1.06)}
   #brV4Stage .br-v4-can.is-active img{filter:saturate(1.18) contrast(1.08) drop-shadow(0 0 12px #ffc86b33)}
@@ -72,9 +71,6 @@
   #brV4Stage .br-v4-pill::before{content:'';width:12px;height:12px;flex:none;background:var(--pill);border-radius:50%;box-shadow:0 0 8px var(--pill)}
   #brV4Stage .br-v4-pill[aria-pressed=true]{background:#aa2b1a60;box-shadow:0 0 0 2px var(--pill),0 0 28px var(--pill);transform:translateY(-2px)}
   #brV4Stage .br-v4-pill:hover{transform:translateY(-3px);background:#9b2d1775}
-  #brV4Stage .br-v4-dots{display:flex;justify-content:center;gap:12px;align-items:center;margin:16px 0 0;z-index:9;position:relative}
-  #brV4Stage .br-v4-dot{appearance:none;border:0;background:#ffffff54;height:8px;width:8px;padding:0;border-radius:99px;cursor:pointer;transition:width .3s,background .3s,box-shadow .3s}
-  #brV4Stage .br-v4-dot[aria-current=true]{background:var(--v4-accent);width:25px;box-shadow:0 0 12px var(--v4-accent)}
   #brV4Stage .br-v4-swipe{display:block;text-align:center;font:italic 500 11px/1.4 Inter,Arial,sans-serif;color:#f2cb9f;margin:10px 0 0}
   #brV4Stage .br-v4-footer{display:flex;justify-content:center;align-items:center;margin:7px 0 0;position:relative;z-index:15}
   #brV4Stage .br-v4-confirm{display:flex;align-items:center;justify-content:space-between;gap:22px;min-width:min(520px,90%);min-height:68px;border:1.5px solid #fff0ba;border-radius:80px;background:linear-gradient(108deg,#fff0bd,#ffc969);color:#4b170b;cursor:pointer;padding:8px 9px 8px 42px;box-shadow:0 13px 38px #14010588;font:900 clamp(17px,2vw,26px)/1 'Barlow Condensed',Impact,sans-serif;text-transform:uppercase;letter-spacing:.02em;transition:transform .3s,background .3s}
@@ -119,7 +115,6 @@
   #brV4Stage .br-v4-right{padding:0;justify-content:flex-start}
   #brV4Stage .br-v4-display{height:555px;flex:none;width:100%;max-width:850px;cursor:grab}
   #brV4Stage .br-v4-display::before{left:25%;bottom:55px;width:62%;height:38px;filter:blur(17px);opacity:.8}
-  #brV4Stage .br-v4-display::after{left:33%;bottom:46px;width:45%;height:14px;border-color:var(--v4-accent);box-shadow:0 0 18px var(--v4-accent);opacity:.85}
   #brV4Stage .br-v4-can{appearance:none;background:none;border:0;padding:0;top:49%;height:485px;width:clamp(170px,20vw,350px);pointer-events:auto;cursor:pointer;touch-action:pan-y;filter:drop-shadow(0 20px 11px #140306a3)!important;transform:translate(-50%,-50%) scale(var(--scale)) rotate(var(--tilt));opacity:var(--opacity);transition:left .84s cubic-bezier(.18,.84,.19,1),transform .84s cubic-bezier(.18,.84,.19,1),opacity .75s ease,filter .75s ease}
   #brV4Stage .br-v4-can img{width:100%;height:100%;object-fit:contain;filter:none!important;pointer-events:none}
   #brV4Stage .br-v4-can.is-active img{filter:drop-shadow(0 0 2px #ffe0aa20)!important}
@@ -127,20 +122,14 @@
   #brV4Stage .br-v4-can:not(.is-active):hover{filter:drop-shadow(0 15px 12px #140306a3) brightness(1.15)!important}
   #brV4Stage .br-v4-arrow{height:51px;width:51px;top:48%;border-color:#ffe0a6a9;background:#1805058c;box-shadow:0 7px 18px #1801048a;font-size:24px;backdrop-filter:blur(6px)}
   #brV4Stage .br-v4-prev{left:-1%}#brV4Stage .br-v4-next{right:0%}
-  #brV4Stage .br-v5-flavor-bar{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:-20px;color:#ffedd4}
-  #brV4Stage .br-v5-current{font:900 12px/1.2 Inter,Arial,sans-serif;letter-spacing:.16em}
-  #brV4Stage .br-v5-counter{font:750 12px/1.2 Inter,Arial,sans-serif;color:#ffd8a0a9;letter-spacing:.12em}
-  #brV4Stage .br-v4-dots{display:flex;justify-content:center;gap:11px;margin:0}
-  #brV4Stage .br-v4-dot{background:#ffe3bf64;height:7px;width:7px;transition:width .3s,background .3s,box-shadow .3s}
-  #brV4Stage .br-v4-dot[aria-current=true]{width:31px;background:#ffd27b;box-shadow:0 0 10px #ffc87869}
   #brV4Stage .br-v4-swipe{margin-top:18px;font:600 12px/1.5 Inter,Arial,sans-serif;color:#ffdbb7ae}
   #brV4Stage .br-v4-footer{margin-top:-4px;position:relative;z-index:10}
   #brV4Stage .br-v4-confirm{min-width:420px;width:min(440px,100%);min-height:65px;padding:7px 8px 7px 33px;box-shadow:0 16px 35px #19060780;transition:transform .3s,filter .3s}
   #brV4Stage .br-v4-confirm:hover{filter:brightness(1.05)}
   #brV4Stage .br-v4-status{position:absolute;width:1px;height:1px;overflow:hidden;white-space:nowrap;clip-path:inset(50%);border:0;padding:0;margin:-1px}
   @media(max-width:1180px){#brV4Stage .br-v4-shell{width:calc(100% - 48px)}#brV4Stage .br-v4-columns{grid-template-columns:minmax(0,.44fr) minmax(0,.56fr)}#brV4Stage .br-v4-title{font-size:clamp(62px,5.2vw,82px)}#brV4Stage .br-v4-tray{height:290px}#brV4Stage .br-v4-display{height:485px}#brV4Stage .br-v4-can{height:415px;width:clamp(155px,20vw,290px)}}
-  @media(max-width:760px){#brV4Stage{min-height:auto!important}#brV4Stage .br-v4-shell{width:calc(100% - 32px);padding:18px 0 38px}#brV4Stage .br-v4-top{padding-bottom:13px}#brV4Stage .br-v5-step{font-size:10px;gap:7px;letter-spacing:.05em}#brV4Stage .br-v5-step-number{width:32px;height:32px}#brV4Stage .br-v4-back{padding:10px 12px;font-size:9px}#brV4Stage .br-v4-columns{display:flex;flex-direction:column;min-height:0}#brV4Stage .br-v4-left{padding:34px 0 0;width:100%}#brV4Stage .br-v4-title{font-size:clamp(60px,11vw,78px);margin:15px 0 18px}#brV4Stage .br-v4-title .br-v4-title-first{white-space:normal}#brV4Stage .br-v4-lead{font-size:15px;margin:10px 0 10px}#brV4Stage .br-v4-tray{display:none}#brV4Stage .br-v4-tray-caption{display:none}#brV4Stage .br-v4-right{width:100%}#brV4Stage .br-v4-display{height:min(96vw,480px);min-height:370px}#brV4Stage .br-v4-can{height:95%;width:min(43vw,290px);top:47%}#brV4Stage .br-v4-display::before{bottom:20px}#brV4Stage .br-v4-display::after{bottom:19px}#brV4Stage .br-v4-arrow{height:39px;width:39px;top:49%}#brV4Stage .br-v5-flavor-bar{margin-top:-11px}#brV4Stage .br-v4-footer{margin-top:18px}#brV4Stage .br-v4-confirm{min-width:0;width:100%;min-height:60px}#brV4Stage .br-v4-swipe{margin-top:11px}}
-  @media(max-width:440px){#brV4Stage .br-v5-step span:last-child{display:none}#brV4Stage .br-v4-title{font-size:clamp(44px,11.7vw,54px)}#brV4Stage .br-v4-display{height:390px;min-height:390px}#brV4Stage .br-v4-can{width:53vw;height:95%}#brV4Stage .br-v4-arrow{width:35px;height:35px}#brV4Stage .br-v5-flavor-bar{gap:12px}}
+  @media(max-width:760px){#brV4Stage{min-height:auto!important}#brV4Stage .br-v4-shell{width:calc(100% - 32px);padding:18px 0 38px}#brV4Stage .br-v4-top{padding-bottom:13px}#brV4Stage .br-v5-step{font-size:10px;gap:7px;letter-spacing:.05em}#brV4Stage .br-v5-step-number{width:32px;height:32px}#brV4Stage .br-v4-back{padding:10px 12px;font-size:9px}#brV4Stage .br-v4-columns{display:flex;flex-direction:column;min-height:0}#brV4Stage .br-v4-left{padding:34px 0 0;width:100%}#brV4Stage .br-v4-title{font-size:clamp(60px,11vw,78px);margin:15px 0 18px}#brV4Stage .br-v4-title .br-v4-title-first{white-space:normal}#brV4Stage .br-v4-lead{font-size:15px;margin:10px 0 10px}#brV4Stage .br-v4-tray{display:none}#brV4Stage .br-v4-tray-caption{display:none}#brV4Stage .br-v4-right{width:100%}#brV4Stage .br-v4-display{height:min(96vw,480px);min-height:370px}#brV4Stage .br-v4-can{height:95%;width:min(43vw,290px);top:47%}#brV4Stage .br-v4-display::before{bottom:20px}#brV4Stage .br-v4-arrow{height:39px;width:39px;top:49%}#brV4Stage .br-v4-footer{margin-top:18px}#brV4Stage .br-v4-confirm{min-width:0;width:100%;min-height:60px}#brV4Stage .br-v4-swipe{margin-top:11px}}
+  @media(max-width:440px){#brV4Stage .br-v5-step span:last-child{display:none}#brV4Stage .br-v4-title{font-size:clamp(44px,11.7vw,54px)}#brV4Stage .br-v4-display{height:390px;min-height:390px}#brV4Stage .br-v4-can{width:53vw;height:95%}#brV4Stage .br-v4-arrow{width:35px;height:35px}}
 
 
 /* BRASA V7 / Same complete tray in both sections, with confirmed drink. */
@@ -194,7 +183,6 @@
             <button class="br-v4-arrow br-v4-prev" id="brV4Prev" type="button" aria-label="Bebida anterior">‹</button>
             <button class="br-v4-arrow br-v4-next" id="brV4Next" type="button" aria-label="Próxima bebida">›</button>
           </div>
-          <div class="br-v5-flavor-bar"><span class="br-v5-current" id="brV5Current" aria-live="off">COLA</span><div class="br-v4-dots" role="group" aria-label="Selecionar bebida">${options.map((drink, index) => `<button type="button" class="br-v4-dot" data-flavor="${drink.key}" aria-label="${drink.label}, bebida ${index+1} de 4" aria-current="false"></button>`).join('')}</div><span class="br-v5-counter" id="brV5Counter">01 / 04</span></div>
           <div class="br-v4-swipe">← Desliza para descobrir os sabores →</div>
         </div>
       </div>
@@ -208,9 +196,6 @@
   const confirmation = document.getElementById('brV4Confirm');
   const status = document.getElementById('brV4Status');
   const pills = [...stage.querySelectorAll('.br-v4-pill')];
-  const currentLabel = stage.querySelector('#brV5Current');
-  const currentCounter = stage.querySelector('#brV5Counter');
-  const dots = [...stage.querySelectorAll('.br-v4-dot')];
   const cans = [...stage.querySelectorAll('.br-v4-can')];
   const reducedMotion = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   let selectedIndex = 0;
@@ -274,9 +259,6 @@
     });
     pills.forEach(btn => btn.setAttribute('aria-pressed',String(btn.dataset.flavor===chosen.key)));
     cans.forEach(can => can.setAttribute('aria-pressed',String(can.dataset.can===chosen.key)));
-    if (currentLabel) currentLabel.textContent=chosen.label.toUpperCase();
-    if (currentCounter) currentCounter.textContent=String(selectedIndex+1).padStart(2,'0')+' / 04';
-    dots.forEach(btn => btn.setAttribute('aria-current',String(btn.dataset.flavor===chosen.key)));
     if (confirmedDrinkKey && confirmedDrinkKey !== chosen.key) {
       confirmedDrinkKey = null;
       updateTray();
@@ -290,7 +272,6 @@
   pills.forEach(btn=>btn.addEventListener('click',()=>select(options.findIndex(x=>x.key===btn.dataset.flavor))));
   let suppressCanClick=false;
   cans.forEach(can=>can.addEventListener('click', event=>{if(suppressCanClick){event.preventDefault();return;}select(options.findIndex(x=>x.key===can.dataset.can));}));
-  dots.forEach(btn=>btn.addEventListener('click',()=>select(options.findIndex(x=>x.key===btn.dataset.flavor))));
   stage.querySelector('#brV4Prev').addEventListener('click',()=>select(selectedIndex-1));
   stage.querySelector('#brV4Next').addEventListener('click',()=>select(selectedIndex+1));
   confirmation.addEventListener('click',()=>{
