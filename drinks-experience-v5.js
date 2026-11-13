@@ -148,7 +148,7 @@
   style.textContent = styles;
   document.head.appendChild(style);
 
-  root.insertAdjacentHTML('beforeend', `
+  root.insertAdjacentHTML('afterend', `
   <section id="brV4Stage" aria-label="Escolhe a tua bebida" data-flavor="cola">
     <div class="br-v5-washes" aria-hidden="true">${options.map(drink=>`<span class="br-v5-wash br-v5-wash--${drink.key}"></span>`).join('')}</div>
     <div class="br-v4-glow" aria-hidden="true"></div>
@@ -257,7 +257,7 @@
   });
   stage.querySelector('#brV4Back').addEventListener('click',()=>{
     document.getElementById('brBackToExtras')?.click();
-    root.classList.remove('is-drink-stage');
+    root.scrollIntoView({behavior:reducedMotion?'auto':'smooth',block:'start'});
   });
   // Pointer events cover touch and mouse drags; the swipe threshold prevents accidental changes.
   let startX=null, startY=null;
@@ -275,13 +275,7 @@
   display.addEventListener('keydown',(event)=>{
     if(event.key==='ArrowRight'||event.key==='ArrowLeft') {event.preventDefault();select(selectedIndex+(event.key==='ArrowRight'?1:-1));}
   });
-  launcher.addEventListener('click',()=>{
-    updateTray();
-    const already = root.querySelector('.br-drink-card[aria-pressed="true"]')?.dataset.drink;
-    const found = options.findIndex(x=>x.key===already);
-    select(found<0 ? selectedIndex : found);
-    root.classList.add('is-drink-stage');
-    root.scrollIntoView({behavior:reducedMotion?'auto':'smooth',block:'start'});
-  });
+  // The beverage experience is a separate section below the combo, not an overlay.
+  updateTray();
   select(0);
 })();
