@@ -129,6 +129,90 @@
   @media(max-width:900px){.br-combo.is-drink-stage .br-combo-main{grid-template-columns:1fr}.br-combo.is-drink-stage .br-tray-panel{grid-column:auto;min-height:540px}.br-combo.is-drink-stage .br-drinks-panel{min-height:0}.br-drinks-options{grid-template-columns:repeat(4,minmax(0,1fr))}.br-drink-card{min-height:260px}.br-drink-card img{height:195px}}
   @media(max-width:620px){.br-combo.is-drink-stage .br-combo-heading h2{font-size:clamp(65px,13vw,94px)}.br-combo.is-drink-stage .br-tray-panel{min-height:485px}.br-drinks-options{grid-template-columns:repeat(2,minmax(0,1fr))}.br-drink-card{min-height:230px}.br-drink-card img{height:167px}.br-drinks-back{font-size:9px;padding:8px 9px}.br-drinks-panel{padding:19px 13px}.br-drink-result{font-size:10px}}
   @media(prefers-reduced-motion:reduce){.br-combo .br-drink-wash,.br-drink-card,.br-drink-card img,.br-combo.is-drink-stage .br-tray-panel,.br-combo.is-drink-stage .br-drinks-panel{transition:none!important;animation:none!important}}
+
+  /* BRASA / visual polish v3 — drinks without cards, tray with grounded items */
+  .br-combo.is-drink-stage{background:linear-gradient(120deg,#ffd45e,#ffaf31 53%,#e97021);transition:background 1s ease}
+  .br-combo .br-drink-washes{inset:0;z-index:0;opacity:0;transition:opacity .75s ease}
+  .br-combo.is-drink-stage .br-drink-washes{opacity:1}
+  .br-combo .br-drink-wash{inset:-1%;will-change:opacity;transition:opacity .85s cubic-bezier(.25,.1,.25,1)}
+  .br-drink-wash--cola{background:radial-gradient(ellipse at 72% 26%,#ffac68 0%,transparent 49%),linear-gradient(120deg,#ffd05c 0%,#f36b2a 43%,#aa1e20 76%,#541024 100%)}
+  .br-drink-wash--laranja{background:radial-gradient(ellipse at 73% 23%,#ffefa0 0%,transparent 50%),linear-gradient(115deg,#ffe368 0%,#ffb22c 44%,#fa7b1c 79%,#b13d13 100%)}
+  .br-drink-wash--uva{background:radial-gradient(ellipse at 77% 19%,#dc9bff 0%,transparent 52%),linear-gradient(112deg,#e2a0df 0%,#af67c2 36%,#652782 76%,#311146 100%)}
+  .br-drink-wash--limao{background:radial-gradient(ellipse at 72% 24%,#f4f8ab 0%,transparent 47%),linear-gradient(116deg,#e3ea8b 0%,#acd24b 42%,#66b336 78%,#27601f 100%)}
+  .br-combo.is-drink-stage .br-drinks-panel{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important;min-height:530px;padding:18px 0 8px;animation:br-drinks-appear .6s .07s both}
+  @keyframes br-drinks-appear{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .br-drinks-top{border-bottom:1px solid #59201850;padding:0 0 20px;color:#4e1e0d}
+  .br-drinks-top span{letter-spacing:.16em}
+  .br-drinks-back{background:#62210e1b;color:#4d1e0b;border-color:#67331f67;backdrop-filter:blur(8px)}
+  .br-drinks-back:hover{background:#4f190f;color:#ffde8a}
+  .br-drinks-intro{color:#542712;font-size:15px;margin:20px 0 10px}
+  .br-drinks-options{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;align-items:end;gap:10px;min-height:348px;overflow:visible;flex:1}
+  .br-drink-card{appearance:none;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:8px;min-height:338px;padding:9px 2px 21px;overflow:visible!important;cursor:pointer;color:#4a170f;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;isolation:isolate;opacity:1;transform:none}
+  .br-combo.is-drink-stage .br-drink-card{animation:br-drink-rise .86s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(.12s + var(--br-sequence)*.15s)}
+  @keyframes br-drink-rise{0%{opacity:0;translate:0 92px;filter:blur(4px)}55%{opacity:1;filter:blur(0)}100%{opacity:1;translate:0 0;filter:none}}
+  .br-drink-card::before{content:"";position:absolute;z-index:-1;left:-14%;right:-14%;top:17%;height:69%;background:radial-gradient(ellipse at 50% 57%,var(--br-accent) 0%,var(--br-accent-soft) 28%,transparent 69%);filter:blur(17px);opacity:.12;transform:scale(.72);border-radius:50%;transition:opacity .46s ease,transform .48s cubic-bezier(.18,1,.3,1);pointer-events:none}
+  .br-drink-card::after{content:"";position:absolute;z-index:-1;left:15%;right:15%;bottom:60px;height:12px;border-radius:50%;background:#3d130c4b;filter:blur(9px)}
+  .br-drink-card:hover::before,.br-drink-card:focus-visible::before,.br-drink-card[aria-pressed=true]::before{opacity:.92;transform:scale(1.19)}
+  .br-drink-card[aria-pressed=true]{border:0!important;background:none!important;box-shadow:none!important;color:#2d130c}
+  .br-drink-card img{display:block;position:relative;z-index:1;width:min(100%,180px)!important;max-width:180px!important;height:270px!important;object-fit:contain;filter:drop-shadow(0 13px 10px #3913077a);transform:translateY(0) rotate(-1deg) scale(1);transition:transform .52s cubic-bezier(.16,1,.3,1),filter .48s ease;will-change:transform}
+  .br-drink-card:hover img,.br-drink-card:focus-visible img,.br-drink-card[aria-pressed=true] img{transform:translateY(-24px) rotate(1deg) scale(1.14);filter:drop-shadow(0 24px 14px #2e0b0780) brightness(1.1) saturate(1.12)}
+  .br-drink-card[data-drink=laranja] img{-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 3%,#000 94%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 3%,#000 94%,transparent 100%)}
+  .br-drink-card[data-drink=limao] img{-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 4%,#000 94%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 4%,#000 94%,transparent 100%)}
+  .br-drink-card[data-drink=uva] img{-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 2%,#000 95%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 2%,#000 95%,transparent 100%)}
+  .br-drink-card strong{display:block;position:relative;z-index:3;margin-top:4px;font:900 clamp(20px,1.8vw,27px)/1 'Barlow Condensed',Impact,sans-serif;letter-spacing:.06em;text-shadow:0 1px 1px #fff3b252;transition:transform .35s,color .35s}
+  .br-drink-card:hover strong{transform:translateY(-3px)}
+  .br-drink-check{top:15px;right:12px;background:#fff0aa;color:#4b1c10;border:2px solid #5c280d22;box-shadow:0 5px 12px #31120b55}
+  .br-drink-result{border:0;border-top:1px solid #6228145c;border-radius:0;background:none!important;padding:17px 0 0;margin-top:17px;color:#4e200f}
+  .br-drink-result strong{color:#4a190e;font-size:15px}
+  .br-combo.is-drink-stage[data-br-wash=uva] .br-drinks-top,.br-combo.is-drink-stage[data-br-wash=uva] .br-drinks-intro,.br-combo.is-drink-stage[data-br-wash=uva] .br-drink-card,.br-combo.is-drink-stage[data-br-wash=uva] .br-drink-result{color:#fff0da}
+  .br-combo.is-drink-stage[data-br-wash=uva] .br-drinks-back{color:#fff1cf;border-color:#ffdca088}
+  .br-combo.is-drink-stage[data-br-wash=uva] .br-combo-heading h2{color:#fff1d7}
+  .br-combo.is-drink-stage[data-br-wash=uva] .br-combo-heading p,.br-combo.is-drink-stage[data-br-wash=uva] .br-combo-eyebrow{color:#fff1cf}
+  .br-combo.is-drink-stage[data-br-wash=uva] .br-drink-result strong{color:#fff1d7}
+  .br-combo.is-drink-stage .br-combo-main{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:clamp(18px,3vw,40px)}
+  .br-tray-visual{height:350px;margin:5px -10px 12px}
+  .br-tray-surface{bottom:2%;max-height:41%;width:100%}
+  .br-tray-burger{bottom:-1%;z-index:4}
+  .br-tray-food--batata{left:5%;bottom:13%;width:25%;height:49%;z-index:5}
+  .br-tray-food--nuggets{right:3%;bottom:16%;width:28%;height:28%;z-index:5}
+  .br-tray-food--onion{right:5%;bottom:7%;width:28%;height:22%;z-index:6}
+  .br-tray-front{position:absolute;z-index:8;pointer-events:none;bottom:2%;left:0;width:100%;height:auto;max-height:41%;object-fit:contain;clip-path:inset(81% 0 0 0);filter:drop-shadow(0 4px 3px #24080b77)}
+  .br-tray-visual.is-filled .br-tray-food.is-selected{animation:br-food-settle .5s cubic-bezier(.18,1,.3,1) both}
+  @keyframes br-food-settle{from{opacity:0;translate:0 -26px}to{opacity:1;translate:0 0}}
+  @media(max-width:1180px){
+    .br-combo.is-drink-stage .br-combo-main{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+    .br-drinks-options{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:5px}
+    .br-drink-card{min-height:280px}
+    .br-drink-card img{height:230px!important}
+    .br-drinks-panel{padding:10px 0}
+  }
+  @media(max-width:900px){
+    .br-combo.is-drink-stage .br-combo-main{grid-template-columns:1fr}
+    .br-combo.is-drink-stage .br-drinks-panel{min-height:350px}
+    .br-drinks-options{grid-template-columns:repeat(4,minmax(0,1fr))!important;min-height:290px}
+    .br-drink-card{min-height:270px}
+    .br-drink-card img{height:222px!important}
+    .br-tray-food--batata{width:26%;left:5%}
+  }
+  @media(max-width:620px){
+    .br-tray-visual{height:305px}
+    .br-tray-burger{bottom:0}
+    .br-tray-food--batata{width:28%;height:44%;bottom:12%;left:2%}
+    .br-tray-food--nuggets{width:29%;height:27%;bottom:13%;right:1%}
+    .br-tray-food--onion{width:29%;height:22%;bottom:7%;right:3%}
+    .br-drinks-options{grid-template-columns:repeat(4,minmax(0,1fr))!important;min-height:230px;gap:0}
+    .br-drink-card{min-height:205px;padding:4px 0 13px}
+    .br-drink-card img{height:172px!important;max-width:100%!important}
+    .br-drink-card strong{font-size:17px}
+    .br-drink-check{width:20px;height:20px;font-size:12px;top:2px;right:0}
+    .br-drinks-intro{font-size:13px}
+    .br-combo.is-drink-stage .br-drinks-panel{padding:0;min-height:290px}
+    .br-tray-front{bottom:2%}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .br-combo.is-drink-stage .br-drink-card,.br-drink-card img,.br-drink-wash,.br-tray-food{animation:none!important;transition:none!important}
+  }
+
   `;
   const style = document.createElement('style');
   style.id = 'brasa-combo-tray-style';
@@ -151,7 +235,7 @@
   const drinkNames = { cola: 'COLA', laranja: 'LARANJA', uva: 'UVA', limao: 'LIMÃO' };
   const drinkColors = { cola: '#ffaf5c', laranja: '#ffc454', uva: '#d9a0ff', limao: '#c0f371' };
   const drinkKeys = Object.keys(drinkNames);
-  const drinkCardsHtml = drinkKeys.map(key => `<button type="button" class="br-drink-card" data-drink="${key}" aria-pressed="false" aria-label="Escolher refrigerante de ${drinkNames[key]}"><img src="/assets/brasa_refrigerante_${key}.webp" alt="Refrigerante ${drinkNames[key]}, lata BRASA com splash e gelo" loading="lazy" decoding="async"><strong>${drinkNames[key]}</strong><span class="br-drink-check" aria-hidden="true">✓</span></button>`).join('');
+  const drinkCardsHtml = drinkKeys.map((key,index) => `<button type="button" class="br-drink-card" data-drink="${key}" style="--br-sequence:${index}" aria-pressed="false" aria-label="Escolher refrigerante de ${drinkNames[key]}"><img src="/assets/brasa_refrigerante_${key}.webp" alt="Refrigerante ${drinkNames[key]}, lata BRASA com splash e gelo" loading="lazy" decoding="async"><strong>${drinkNames[key]}</strong><span class="br-drink-check" aria-hidden="true">✓</span></button>`).join('');
   root.className = 'combo-section br-combo';
   root.innerHTML = `
     <div class="br-combo-wrap">
@@ -177,6 +261,7 @@
             <div class="br-tray-placeholder" id="brTrayPlaceholder" aria-hidden="true">O TEU SMASH<br>MERECE UMA BANDEJA À ALTURA.</div>
             <div class="br-tray-burger" id="brTrayBurger" aria-hidden="true"></div>
             ${cards.map(c => photo(asset[c.key],`br-tray-food br-tray-food--${c.key}`)).join('')}
+            ${photo(asset.tray,'br-tray-front')}
           </div>
           <button type="button" class="br-tray-button" id="brTrayButton"><span>COLOCAR OS MEUS ITENS</span><i aria-hidden="true">↗</i></button>
           <button type="button" class="br-pick-drink" id="brChooseDrink"><span>ESCOLHER BEBIDA</span><i aria-hidden="true">↗</i></button>
@@ -304,11 +389,12 @@
     comboEyebrow.textContent='REFRESCA O TEU COMBO';
     comboTitle.innerHTML='ESCOLHE <span>A TUA</span><br>BEBIDA.';
     comboDescription.innerHTML='O teu smash e os acompanhamentos ficam na bandeja. <strong>Agora escolhe o refrigerante.</strong>';
-    setDrinkBackdrop(chosenDrink || 'cola');
+    setDrinkBackdrop(chosenDrink);
     trayStatus.textContent='O TEU SMASH E OS ACOMPANHAMENTOS ESTÃO NA BANDEJA.';
     root.querySelector('#brDrinksPanel').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'});
   }
   function setDrinkBackdrop(key) {
+    root.dataset.brWash=key || 'neutral';
     drinkWashes.forEach(wash => wash.classList.toggle('is-active', wash.dataset.wash === key));
   }
   function selectDrink(key) {
@@ -335,6 +421,15 @@
     trayStatus.textContent='OS ITENS CONTINUAM NA BANDEJA. ESCOLHE A TUA BEBIDA QUANDO QUISERES.';
   });
   drinkButtons.forEach(button=>button.addEventListener('click',()=>selectDrink(button.dataset.drink)));
+  // Preview the full-section colour during hover or keyboard focus; preserve the selected flavor.
+  drinkButtons.forEach(button => {
+    const preview=() => { if(root.classList.contains('is-drink-stage')) setDrinkBackdrop(button.dataset.drink); };
+    const restore=() => { if(root.classList.contains('is-drink-stage')) setDrinkBackdrop(chosenDrink); };
+    button.addEventListener('pointerenter',preview);
+    button.addEventListener('pointerleave',restore);
+    button.addEventListener('focus',preview);
+    button.addEventListener('blur',restore);
+  });
   drinkButtons.forEach(button => {
     button.style.setProperty('--br-accent',drinkColors[button.dataset.drink]);
     button.style.setProperty('--br-accent-soft',drinkColors[button.dataset.drink]+'6b');
