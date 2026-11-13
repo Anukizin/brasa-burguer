@@ -37,8 +37,10 @@
   #brV4Stage .br-v4-columns{display:grid;grid-template-columns:minmax(0,.44fr) minmax(0,.56fr);align-items:stretch;gap:0;position:relative;min-height:640px}
   #brV4Stage .br-v4-left{padding:75px 0 0;min-width:0;position:relative;z-index:7}
   #brV4Stage .br-v4-eyebrow{color:#ffc65c;letter-spacing:.37em;font:900 13px/1.4 Inter,Arial,sans-serif}
-  #brV4Stage .br-v4-title{font:italic 900 clamp(72px,7.4vw,120px)/.78 'Barlow Condensed',Impact,'Arial Narrow',sans-serif;text-transform:uppercase;letter-spacing:-.028em;margin:20px 0 23px;text-shadow:0 7px 24px #1c030455}
+  #brV4Stage .br-v4-title{font:italic 900 clamp(59px,4.8vw,82px)/.88 'Barlow Condensed',Impact,'Arial Narrow',sans-serif;text-transform:uppercase;letter-spacing:-.028em;margin:20px 0 23px;text-shadow:0 7px 24px #1c030455}
   #brV4Stage .br-v4-title span{display:block;color:#ffc64e}
+  #brV4Stage .br-v4-title .br-v4-title-first{color:#fff1d7;white-space:nowrap}
+  #brV4Stage .br-v4-title .br-v4-title-last{color:#ffbf4c}
   #brV4Stage .br-v4-underline{display:block;height:6px;width:52%;margin-top:5px;border-top:4px solid #ffac33;border-radius:50%;transform:rotate(-3deg)}
   #brV4Stage .br-v4-lead{font:500 clamp(17px,1.5vw,23px)/1.4 Inter,Arial,sans-serif;max-width:450px;color:#f6e7d3;margin:23px 0 10px}
   #brV4Stage .br-v4-tray{position:relative;width:min(100%,640px);height:305px;margin:10px 0 0;transform:translateX(-25px);isolation:isolate}
@@ -80,8 +82,8 @@
   #brV4Stage .br-v4-confirm i{width:50px;height:50px;border-radius:50%;background:#591e0e;color:#ffcf68;display:grid;place-items:center;font:400 25px Arial,sans-serif}
   #brV4Stage .br-v4-status{text-align:center;color:#fcd79f;font:700 12px/1.5 Inter,Arial,sans-serif;min-height:18px;margin:13px 0 0}
   @media(max-width:1120px){#brV4Stage .br-v4-progress{display:none}#brV4Stage .br-v4-shell{width:calc(100% - 40px)}#brV4Stage .br-v4-left{padding-top:85px}#brV4Stage .br-v4-tray{height:285px}#brV4Stage .br-v4-display{height:500px}#brV4Stage .br-v4-can{height:450px;width:clamp(150px,23vw,280px)}#brV4Stage .br-v4-pill{min-width:0}}
-  @media(max-width:760px){#brV4Stage .br-v4-shell{width:calc(100% - 32px);padding:24px 0 35px}#brV4Stage .br-v4-brand{font-size:27px}#brV4Stage .br-v4-back{font-size:10px}#brV4Stage .br-v4-columns{display:flex;flex-direction:column;min-height:0}#brV4Stage .br-v4-left{padding:36px 0 0}#brV4Stage .br-v4-title{font-size:clamp(72px,17vw,120px);margin:15px 0}#brV4Stage .br-v4-lead{font-size:16px;max-width:340px;margin:20px 0 0}#brV4Stage .br-v4-tray{display:none}#brV4Stage .br-v4-tray-caption{display:none}#brV4Stage .br-v4-right{padding-top:0}#brV4Stage .br-v4-display{height:min(100vw,510px);min-height:360px}#brV4Stage .br-v4-can{width:min(44vw,255px);height:95%;top:49%}#brV4Stage .br-v4-prev{left:0}#brV4Stage .br-v4-next{right:0}#brV4Stage .br-v4-flavors{margin-top:-2px;gap:7px}#brV4Stage .br-v4-pill{padding:10px 11px;font-size:12px}#brV4Stage .br-v4-pill::before{width:10px;height:10px}#brV4Stage .br-v4-footer{margin-top:26px}#brV4Stage .br-v4-confirm{padding-left:24px;min-height:62px}#brV4Stage .br-v4-confirm i{width:44px;height:44px}}
-  @media(max-width:425px){#brV4Stage .br-v4-display{height:372px;min-height:372px}#brV4Stage .br-v4-title{font-size:clamp(68px,17vw,85px)}#brV4Stage .br-v4-pill{flex:1 1 41%;font-size:12px}#brV4Stage .br-v4-arrow{width:36px;height:36px}#brV4Stage .br-v4-can{width:52vw;height:97%}#brV4Stage .br-v4-swipe{margin-top:7px}}
+  @media(max-width:760px){#brV4Stage .br-v4-shell{width:calc(100% - 32px);padding:24px 0 35px}#brV4Stage .br-v4-brand{font-size:27px}#brV4Stage .br-v4-back{font-size:10px}#brV4Stage .br-v4-columns{display:flex;flex-direction:column;min-height:0}#brV4Stage .br-v4-left{padding:36px 0 0}#brV4Stage .br-v4-title{font-size:clamp(56px,12vw,82px);margin:15px 0}#brV4Stage .br-v4-title .br-v4-title-first{white-space:normal}#brV4Stage .br-v4-lead{font-size:16px;max-width:340px;margin:20px 0 0}#brV4Stage .br-v4-tray{display:none}#brV4Stage .br-v4-tray-caption{display:none}#brV4Stage .br-v4-right{padding-top:0}#brV4Stage .br-v4-display{height:min(100vw,510px);min-height:360px}#brV4Stage .br-v4-can{width:min(44vw,255px);height:95%;top:49%}#brV4Stage .br-v4-prev{left:0}#brV4Stage .br-v4-next{right:0}#brV4Stage .br-v4-flavors{margin-top:-2px;gap:7px}#brV4Stage .br-v4-pill{padding:10px 11px;font-size:12px}#brV4Stage .br-v4-pill::before{width:10px;height:10px}#brV4Stage .br-v4-footer{margin-top:26px}#brV4Stage .br-v4-confirm{padding-left:24px;min-height:62px}#brV4Stage .br-v4-confirm i{width:44px;height:44px}}
+  @media(max-width:425px){#brV4Stage .br-v4-display{height:372px;min-height:372px}#brV4Stage .br-v4-title{font-size:clamp(54px,11.8vw,74px)}#brV4Stage .br-v4-pill{flex:1 1 41%;font-size:12px}#brV4Stage .br-v4-arrow{width:36px;height:36px}#brV4Stage .br-v4-can{width:52vw;height:97%}#brV4Stage .br-v4-swipe{margin-top:7px}}
   @media(prefers-reduced-motion:reduce){#brV4Stage *,#brV4Stage::before,#brV4Stage::after{animation:none!important;transition:none!important}}
   `;
   const style = document.createElement('style');
@@ -101,7 +103,7 @@
       <div class="br-v4-columns">
         <div class="br-v4-left">
           <span class="br-v4-eyebrow">QUASE LÁ!</span>
-          <h2 class="br-v4-title">ESCOLHE A TUA <span>BEBIDA.</span><i class="br-v4-underline" aria-hidden="true"></i></h2>
+          <h2 class="br-v4-title"><span class="br-v4-title-first">ESCOLHE A TUA</span><span class="br-v4-title-last">BEBIDA.</span><i class="br-v4-underline" aria-hidden="true"></i></h2>
           <p class="br-v4-lead">Quatro sabores. Escolhe o que combina melhor com <strong>o teu smash.</strong></p>
           <div class="br-v4-tray" id="brV4Tray" aria-label="O teu combo com o smash e os acompanhamentos"></div>
           <div class="br-v4-tray-caption" id="brV4TrayCaption">O TEU COMBO, DO TEU JEITO.</div>
@@ -162,7 +164,7 @@
       const distance = mod(i-selectedIndex, options.length);
       // Main can occupies right foreground; other flavors sit behind it on a depth arc.
       const slot = [
-        {pos:'57%',scale:'1.0',tilt:'5deg',opacity:'1',blur:'0px',layer:'5'},
+        {pos:'57%',scale:'1.13',tilt:'5deg',opacity:'1',blur:'0px',layer:'5'},
         {pos:'91%',scale:'.57',tilt:'-7deg',opacity:'.71',blur:'1.2px',layer:'2'},
         {pos:'10%',scale:'.46',tilt:'7deg',opacity:'.53',blur:'2px',layer:'1'},
         {pos:'27%',scale:'.67',tilt:'-7deg',opacity:'.78',blur:'.8px',layer:'3'}
