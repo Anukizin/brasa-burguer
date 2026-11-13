@@ -142,6 +142,29 @@
   @media(max-width:760px){#brV4Stage{min-height:auto!important}#brV4Stage .br-v4-shell{width:calc(100% - 32px);padding:18px 0 38px}#brV4Stage .br-v4-top{padding-bottom:13px}#brV4Stage .br-v5-step{font-size:10px;gap:7px;letter-spacing:.05em}#brV4Stage .br-v5-step-number{width:32px;height:32px}#brV4Stage .br-v4-back{padding:10px 12px;font-size:9px}#brV4Stage .br-v4-columns{display:flex;flex-direction:column;min-height:0}#brV4Stage .br-v4-left{padding:34px 0 0;width:100%}#brV4Stage .br-v4-title{font-size:clamp(60px,11vw,78px);margin:15px 0 18px}#brV4Stage .br-v4-title .br-v4-title-first{white-space:normal}#brV4Stage .br-v4-lead{font-size:15px;margin:10px 0 10px}#brV4Stage .br-v4-tray{display:none}#brV4Stage .br-v4-tray-caption{display:none}#brV4Stage .br-v4-right{width:100%}#brV4Stage .br-v4-display{height:min(96vw,480px);min-height:370px}#brV4Stage .br-v4-can{height:95%;width:min(43vw,290px);top:47%}#brV4Stage .br-v4-display::before{bottom:20px}#brV4Stage .br-v4-display::after{bottom:19px}#brV4Stage .br-v4-arrow{height:39px;width:39px;top:49%}#brV4Stage .br-v5-flavor-bar{margin-top:-11px}#brV4Stage .br-v4-footer{margin-top:18px}#brV4Stage .br-v4-confirm{min-width:0;width:100%;min-height:60px}#brV4Stage .br-v4-swipe{margin-top:11px}}
   @media(max-width:440px){#brV4Stage .br-v5-step span:last-child{display:none}#brV4Stage .br-v4-title{font-size:clamp(44px,11.7vw,54px)}#brV4Stage .br-v4-display{height:390px;min-height:390px}#brV4Stage .br-v4-can{width:53vw;height:95%}#brV4Stage .br-v4-arrow{width:35px;height:35px}#brV4Stage .br-v5-flavor-bar{gap:12px}}
 
+
+/* BRASA V7 / Same complete tray in both sections, with confirmed drink. */
+#brV4Stage #brV4Tray{width:min(100%,625px)!important;height:345px!important;transform:translateX(-10px)!important;overflow:visible!important;margin:10px 0 2px!important;}
+#brV4Stage #brV4Tray>.br-tray-visual{width:100%!important;height:100%!important;margin:0!important;position:relative!important;overflow:visible!important;isolation:isolate;}
+#brV4Stage #brV4Tray .br-tray-placeholder{display:none!important;}
+#brV4Stage #brV4Tray .br-tray-surface{bottom:4%!important;max-height:43%!important;}
+#brV4Stage #brV4Tray .br-tray-burger{left:50%;bottom:8%!important;transform:translateX(-50%) scale(.51)!important;opacity:1!important;animation:none!important;transition:left .5s ease!important;}
+#brV4Stage #brV4Tray .br-tray-food{opacity:0;transform:translateY(-12px) scale(.94);}
+#brV4Stage #brV4Tray .br-tray-food.is-selected{opacity:1!important;transform:translateY(0) scale(1)!important;animation:none!important;}
+#brV4Stage #brV4Tray .br-tray-food--batata{width:29%!important;height:54%!important;left:1%!important;bottom:16%!important}
+#brV4Stage #brV4Tray .br-tray-food--nuggets{width:30%!important;height:35%!important;right:0!important;bottom:17%!important;transition:right .4s ease!important}
+#brV4Stage #brV4Tray .br-tray-food--onion{width:29%!important;height:29%!important;right:2%!important;bottom:9%!important;transition:right .4s ease!important}
+#brV4Stage #brV4Tray .br-tray-front{z-index:9!important;bottom:4%!important;max-height:43%!important}
+#brV4Stage #brV4Tray.has-drink .br-tray-burger{left:46%!important}
+#brV4Stage #brV4Tray.has-drink .br-tray-food--nuggets{right:17%!important}
+#brV4Stage #brV4Tray.has-drink .br-tray-food--onion{right:17%!important}
+#brV4Stage #brV4Tray .br-drink-can-on-tray{position:absolute;z-index:8;right:-1%;bottom:13%;width:22%;height:70%;object-fit:contain;pointer-events:none;filter:drop-shadow(0 14px 11px #2207078c);animation:br-beverage-lands .7s cubic-bezier(.16,1,.3,1) both;}
+@keyframes br-beverage-lands{from{opacity:0;transform:translateY(-55px) rotate(-9deg) scale(.76)}to{opacity:1;transform:translateY(0) rotate(0) scale(1)}}
+#brV4Stage #brV4TrayCaption{margin:2px 0 14px!important;line-height:1.5!important;}
+@media(max-width:900px){#brV4Stage #brV4Tray{width:min(100%,470px)!important;height:245px!important;transform:none!important;margin:12px auto 0!important}#brV4Stage #brV4Tray .br-tray-burger{transform:translateX(-50%) scale(.40)!important}}
+@media(max-width:600px){#brV4Stage #brV4Tray{height:205px!important;width:min(100%,390px)!important}#brV4Stage #brV4Tray .br-tray-burger{transform:translateX(-50%) scale(.33)!important}#brV4Stage #brV4Tray .br-drink-can-on-tray{width:24%;height:72%}}
+@media(prefers-reduced-motion:reduce){#brV4Stage #brV4Tray .br-drink-can-on-tray{animation:none}}
+
   `;
   const style = document.createElement('style');
   style.id = 'brasa-beverage-v4-style';
@@ -195,20 +218,41 @@
   const mod = (a,n) => ((a % n) + n) % n;
   const oldTray = document.getElementById('brTrayBurger');
   const oldTrayPanel = document.getElementById('brTrayVisual');
+  let confirmedDrinkKey = null;
   const foodLabels = { batata:'Batata frita', nuggets:'Nuggets', onion:'Onion rings' };
   const foodSources = { batata:'/assets/brasa_batata_frita.webp', nuggets:'/assets/brasa_nuggets.webp', onion:'/assets/brasa_onion_rings.webp' };
 
   function updateTray() {
     const tray = document.getElementById('brV4Tray');
-    const present = Object.keys(foodLabels).filter(k => oldTrayPanel.querySelector(`.br-tray-food--${k}`)?.classList.contains('is-selected'));
-    tray.innerHTML = `<img class="br-v4-tray-base" src="/assets/brasa_bandeja_vazia.webp" alt="Bandeja vermelha BRASA" decoding="async">
-      <div class="br-v4-burger" aria-hidden="true">${oldTray?.innerHTML || ''}</div>
-      ${present.map(k => `<img class="br-v4-food br-v4-food--${k}" src="${foodSources[k]}" alt="" decoding="async">`).join('')}
-      <img class="br-v4-tray-lip" src="/assets/brasa_bandeja_vazia.webp" alt="" aria-hidden="true">`;
-    document.getElementById('brV4TrayCaption').textContent = present.length
-      ? `SMASH + ${present.map(k=>foodLabels[k]).join(' · ').toUpperCase()}`
-      : 'O TEU SMASH JÁ ESTÁ NA BANDEJA.';
+    if (!tray || !oldTrayPanel) return;
+    const active = Object.keys(foodLabels).filter(k => oldTrayPanel.querySelector(`.br-tray-food--${k}`)?.classList.contains('is-selected'));
+    // Preserve the exact assembled burger, spacing and product positions used in the combo.
+    const composition = oldTrayPanel.cloneNode(true);
+    composition.id = 'brDrinkTrayComposition';
+    composition.querySelectorAll('[id]').forEach(node => node.removeAttribute('id'));
+    composition.querySelector('.br-tray-placeholder')?.remove();
+    composition.setAttribute('aria-hidden','true');
+    tray.replaceChildren(composition);
+    tray.classList.toggle('has-drink',Boolean(confirmedDrinkKey));
+    if (confirmedDrinkKey) {
+      const chosen = options.find(option => option.key === confirmedDrinkKey);
+      if (chosen) {
+        const can = document.createElement('img');
+        can.className = 'br-drink-can-on-tray';
+        can.src = chosen.image;
+        can.alt = '';
+        can.draggable = false;
+        can.decoding = 'async';
+        composition.append(can);
+      }
+    }
+    const caption = document.getElementById('brV4TrayCaption');
+    if (caption) caption.textContent = (active.length
+      ? 'SMASH + ' + active.map(k => foodLabels[k]).join(' · ').toUpperCase()
+      : 'O TEU SMASH')
+      + (confirmedDrinkKey ? ' + ' + options.find(o => o.key === confirmedDrinkKey).label.toUpperCase() : '');
   }
+  window.__brasaRefreshBeverageTray = updateTray;
 
   function select(index) {
     selectedIndex = mod(index, options.length);
@@ -235,6 +279,10 @@
     if (currentLabel) currentLabel.textContent=chosen.label.toUpperCase();
     if (currentCounter) currentCounter.textContent=String(selectedIndex+1).padStart(2,'0')+' / 04';
     dots.forEach(btn => btn.setAttribute('aria-current',String(btn.dataset.flavor===chosen.key)));
+    if (confirmedDrinkKey && confirmedDrinkKey !== chosen.key) {
+      confirmedDrinkKey = null;
+      updateTray();
+    }
     confirmed = false;
     confirmation.querySelector('span').textContent = 'CONFIRMAR BEBIDA';
     status.textContent = `${chosen.label.toUpperCase()} SELECIONADA · DESLIZA OU CLICA PARA TROCAR`;
@@ -249,6 +297,8 @@
   stage.querySelector('#brV4Next').addEventListener('click',()=>select(selectedIndex+1));
   confirmation.addEventListener('click',()=>{
     const drink = options[selectedIndex];
+    confirmedDrinkKey = drink.key;
+    updateTray();
     const originalButton = root.querySelector(`.br-drink-card[data-drink="${drink.key}"]`);
     originalButton?.click();
     confirmed = true;
